@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    HOLA MUNDO CON LARAVEL
+                    Saludo de jroge
                 </div>
 
                 <div class="links">
