@@ -19,3 +19,5 @@ use Illuminate\Http\Request;
 
 // Route::get('xxx', 'TestController@create');
 Route::apiResource('tests', 'TestController');
+Route::apiResource('patients', 'PatientController');
+

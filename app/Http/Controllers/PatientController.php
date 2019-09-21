@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Test;
 use Illuminate\Http\Request;
+use App\Patient;
+use App\Person;
 
-class TestController extends Controller
+class PatientController extends Controller
 {
 
 	/**
@@ -13,9 +14,21 @@ class TestController extends Controller
 	 * @return view
 	 */
 	public function index(){
-		// $saludo = 'Hola Mundo';
-		$saludo = Test::all();
-		 return $saludo;
+
+		$patients = Person::all();
+
+		return $patients;
+		// return "Hola";
+
+		
+	}
+
+	/**
+	 * Muestra el formulario donde insertar un datos a un modelo de la BBDD
+	 * @return 
+	 */
+	public function create(){
+
 	}
 
 	/**
@@ -27,11 +40,18 @@ class TestController extends Controller
 	}
 
 	/**
+	 * Metodo que devuelve el formulario para editar los datos de un modelo de la BBDD
+	 * @return 
+	 */
+	public function edit(){
+	
+	}
+
+	/**
 	 * Metodo que actualiza los datos de un modelo de la BBDD
 	 * @return 
 	 */
 	public function update(Request $request, Test $test){
-
 	
 	}
 
