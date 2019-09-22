@@ -13,8 +13,8 @@ class TestController extends Controller
 	 * @return view
 	 */
 	public function index(){
-		// $saludo = 'Hola Mundo';
-		$saludo = Test::all();
+		 $saludo = 'Hola Mundo';
+		//$saludo = Test::all();
 		 return $saludo;
 	}
 
