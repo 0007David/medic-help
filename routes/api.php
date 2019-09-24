@@ -21,3 +21,6 @@ use Illuminate\Http\Request;
 Route::apiResource('tests', 'TestController');
 Route::apiResource('patients', 'PatientController');
 
+Route::post('registrar','UsuarioController@registrar');
+Route::post('login','UsuarioController@login');
+
