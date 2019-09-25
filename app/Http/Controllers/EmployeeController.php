@@ -107,6 +107,6 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        echo json_encode('no se elimana a un paciente')
+        
     }
 }
