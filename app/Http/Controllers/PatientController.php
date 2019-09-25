@@ -15,10 +15,10 @@ class PatientController extends Controller
 	 */
 	public function index(){
 
-		$patients = Person::all();
+		$patients = Person::whereHasMorph('peopleable',[Patient::class])->get();
 
-		return $patients;
-		// return "Hola";
+		echo json_encode($patients);
+		
 
 		
 	}
@@ -35,7 +35,22 @@ class PatientController extends Controller
 	 * Metodo que inserta los datos de un modelo de la BBDD
 	 * @return 
 	 */
-	public function store(Request $request, Test $test){
+	public function store(Request $request){
+
+		$patient = new Patient();
+		$patient->nro_seguro = $request->nro_seguro;
+		$patient->save();
+		$patient->person()->create([
+			'ci'=> $request->ci,
+			'nombre'=>$request->nombre,
+			'apellido'=>$request->apellido,
+			'telefono'=>$request->telefono,
+			'fecha_nacimiento'=>$request->fecha_nacimiento
+		]);
+
+		echo json_encode($patient);
+
+
 	
 	}
 
@@ -51,7 +66,20 @@ class PatientController extends Controller
 	 * Metodo que actualiza los datos de un modelo de la BBDD
 	 * @return 
 	 */
-	public function update(Request $request, Test $test){
+	public function update(Request $request, $id){
+
+		$patient = Patient::find($id);
+		$patient->nro_seguro = $request->nro_seguro;
+		$patient->save();
+		$patient->person()->create([
+			'ci'=> $request->ci,
+			'nombre'=>$request->nombre,
+			'apellido'=>$request->apellido,
+			'telefono'=>$request->telefono,
+			'fecha_nacimiento'=>$request->fecha_nacimiento
+		]);
+
+		echo json_encode($patient);
 	
 	}
 
@@ -59,15 +87,17 @@ class PatientController extends Controller
 	 * Metodo que muestra los datos de un modelo de la BBDD
 	 * @return 
 	 */
-	public function show(){
-	
+	public function show($id){
+		$patient = Patient::find($id);
+
+		echo json_encode($patient);
 	}
 
 	/**
 	 * Metodo que elimina un dato del modelo de la BBDD
 	 * @return 
 	 */
-	public function destroy(Test $test){
+	public function destroy($id){
 	
 	}
 

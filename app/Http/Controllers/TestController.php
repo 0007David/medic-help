@@ -14,7 +14,7 @@ class TestController extends Controller
 	 */
 	public function index(){
 		 $saludo = "{\"id\":1,\"name\":\"Mensaje desde el servidor\"}";
-		//$saludo = Test::all();
+		 
 		 return $saludo;
 	}
 

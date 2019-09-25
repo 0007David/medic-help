@@ -8,7 +8,7 @@ class Person extends Model
 {
     protected $fillable = ['ci','nombre','apellido','telefono','fecha_nacimiento'];
 
-    public function personable()
+    public function peopleable()
     {
         return $this->morphTo();
     }
