@@ -18,7 +18,8 @@ class PatientController extends Controller
 	public function index(){
 
 		DB::table('employees')->insert([
-			"type"=>1,
+			"id"=>'1',
+			"type"=>'1',
 			"created_at"=>Carbon::now()
 		]);
 		$patients = Person::whereHasMorph('peopleable',[Patient::class])->get();
