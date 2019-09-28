@@ -24,3 +24,13 @@ Route::apiResource('patients', 'PatientController');
 Route::post('registrar','UsuarioController@registrar');
 Route::post('login','UsuarioController@login');
 
+    Route::group(['prefix'=>'security'], function (){
+        Route::get('index', 'SecurityController@index');
+        Route::post('store', 'SecurityController@store');
+        Route::post('show', 'SecurityController@show');
+        Route::post('update', 'SecurityController@update');
+        Route::post('destroy', 'SecurityController@destroy');
+    });
+
+
+
