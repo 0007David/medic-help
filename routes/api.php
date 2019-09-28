@@ -18,8 +18,9 @@ use Illuminate\Http\Request;
 // });
 
 // Route::get('xxx', 'TestController@create');
-Route::apiResource('tests', 'TestController');
+// Route::apiResource('tests', 'TestController');
 Route::apiResource('patients', 'PatientController');
+Route::apiResource('employees', 'EmployeeController');
 
 Route::post('registrar','UsuarioController@registrar');
 Route::post('login','UsuarioController@login');

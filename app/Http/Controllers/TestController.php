@@ -13,8 +13,8 @@ class TestController extends Controller
 	 * @return view
 	 */
 	public function index(){
-		 $saludo = "{3}";
-		//$saludo = Test::all();
+
+		 $saludo = "{\"id\":1,\"name\":\"Mensaje desde el servidor\"}";
 		 return $saludo;
 	}
 
