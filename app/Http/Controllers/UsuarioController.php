@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -12,31 +13,36 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsuarioController extends Controller
 {
-    public function registrar(Request $request){
-        $nombre=$request['nombre'];
-        if(! Usuario::where('nombre', $nombre )->exists()){
-            $usuario=new Usuario();
-            $usuario->nombre=$request['nombre'];
-            $usuario->contraseña=bcrypt($request['contraseña']);
-            $usuario->id_employee=$request['id_employee'];
+    public function registrar(Request $request)
+    {
+        $nombre = $request['nombre'];
+        if (!Usuario::where('nombre', $nombre)->exists()) {
+            $usuario = new Usuario();
+            $usuario->nombre = $request['nombre'];
+            $usuario->contraseña = Hash::make($request['contraseña']);
+            $usuario->id_employee = $request['id_employee'];
             $usuario->save();
             return "Usuario Creado";
         }
-            return "Error Usuario ya existe existe";
-
+        return "Error Usuario ya existe existe";
     }
 
 
-    public function login(Request $request){
-        $nombre=$request['nombre'];
-        $contraseña=$request['contraseña'];
-        $id_employee=$request['id_employee'];
-
-        if (Usuario::where('nombre', $nombre)->where('contraseña', bcrypt($contraseña))
-        ->where('id_employee', $id_employee)->exists()) {
-            return "Acceso Permitido";
-        }
+    public function login(Request $request)
+    {
+        $nombre = $request->nombre;
+        $contraseña = Usuario::where('nombre', $nombre)->select('contraseña')->get();
+        if (Usuario::where('nombre', $nombre)->exists()) {
+            if (password_verify(($request->contraseña),$contraseña)) {
+                
+            }else{
+                password_verify($request->contraseña, $contraseña);
+                echo $contraseña;
+                echo hash::make($request->contraseña);
+            }
+        } else {
             return "Denegado";
+        }
     }
 
     /**

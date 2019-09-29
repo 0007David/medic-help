@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Person;
 use App\Employee;
 use App\Usuario;
@@ -54,7 +55,7 @@ class EmployeeController extends Controller
 		]);
         $usuario=new Usuario();
         $usuario->nombre=$request->email;
-        $usuario->contraseña=bcrypt($request->ci);
+        $usuario->contraseña=Hash::make($request->ci);
         $usuario->id_employee=$employee['id'];
         $usuario->save();
         echo json_encode($usuario);    
@@ -98,10 +99,13 @@ class EmployeeController extends Controller
 		$employee->type = $request->type;
 		$employee->save();
 		$employee->person()->update([
-			'nombre'=>$request->nombre,
+            'ci'=> $request->ci,
+            'nombre'=>$request->nombre,
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
-			'fecha_nacimiento'=>$request->fecha_nacimiento
+            'fecha_nacimiento'=>$request->fecha_nacimiento,
+            'email'=>$request->email,
+            'sexo'=>$request->sexo
 		]);
 
 		echo json_encode($employee);
