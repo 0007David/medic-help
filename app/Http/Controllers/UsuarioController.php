@@ -16,7 +16,7 @@ class UsuarioController extends Controller
         if (!Usuario::where('nombre', $nombre)->exists()) {
             $usuario = new Usuario();
             $usuario->nombre = $request['nombre'];
-            $usuario->contraseña = Hash::make($request['contraseña']);
+            $usuario->contraseña = $request['contraseña'];
             $usuario->id_employee = $request['id_employee'];
             $usuario->save();
             return "Usuario Creado";
