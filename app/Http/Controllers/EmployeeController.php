@@ -59,7 +59,7 @@ class EmployeeController extends Controller
 
         $usuario=new Usuario();
         $usuario->nombre=$request->email;
-        $usuario->contraseña=Hash::make($request->ci);
+        $usuario->contraseña=$request->ci;
         $usuario->id_employee=$employee['id'];
         $usuario->save();
         echo json_encode($usuario);

@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-
-
-
 class UsuarioController extends Controller
 {
     public function registrar(Request $request)
@@ -27,24 +24,16 @@ class UsuarioController extends Controller
         return "Error Usuario ya existe existe";
     }
 
-
     public function login(Request $request)
     {
         $nombre = $request->nombre;
-        $contraseña = Usuario::where('nombre', $nombre)->select('contraseña')->get();
-        if (Usuario::where('nombre', $nombre)->exists()) {
-            if (password_verify(($request->contraseña),$contraseña)) {
-                
-            }else{
-                password_verify($request->contraseña, $contraseña);
-                echo $contraseña;
-                echo hash::make($request->contraseña);
-            }
+        $contraseña = $request->contraseña;
+        if (Usuario::where('nombre', $nombre)->where('contraseña', $contraseña)->exists()) {
+            return "Success";
         } else {
-            return "Denegado";
+            return "Fail";
         }
     }
-
     /**
      * Display a listing of the resource.
      *
