@@ -17,7 +17,7 @@ class UsuarioController extends Controller
         if(! Usuario::where('nombre', $nombre )->exists()){
             $usuario=new Usuario();
             $usuario->nombre=$request['nombre'];
-            $usuario->contraseña=$request['contraseña'];
+            $usuario->contraseña=bcrypt($request['contraseña']);
             $usuario->id_employee=$request['id_employee'];
             $usuario->save();
             return "Usuario Creado";
@@ -32,7 +32,7 @@ class UsuarioController extends Controller
         $contraseña=$request['contraseña'];
         $id_employee=$request['id_employee'];
 
-        if (Usuario::where('nombre', $nombre)->where('contraseña', $contraseña)
+        if (Usuario::where('nombre', $nombre)->where('contraseña', bcrypt($contraseña))
         ->where('id_employee', $id_employee)->exists()) {
             return "Acceso Permitido";
         }
