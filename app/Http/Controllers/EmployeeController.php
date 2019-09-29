@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use App\Person;
 use App\Employee;
 use App\Usuario;
@@ -17,7 +17,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Person::whereHasMorph('peopleable',[Employee::class])->get();
+        $employees = DB::table('people')
+                      ->join('employees', 'employees.id', '=', 'people.peopleable_id')
+                      ->get();    
 
 		echo json_encode($employees);
         
@@ -51,15 +53,18 @@ class EmployeeController extends Controller
 			'telefono'=>$request->telefono,
             'fecha_nacimiento'=>$request->fecha_nacimiento,
             'email'=>$request->email,
-            'sexo'=>$request->sexo
+            'sexo'=>$request->sexo,
+            'estado'=>$request->estado
 		]);
+
         $usuario=new Usuario();
         $usuario->nombre=$request->email;
         $usuario->contraseña=Hash::make($request->ci);
         $usuario->id_employee=$employee['id'];
         $usuario->save();
-        echo json_encode($usuario);    
+        echo json_encode($usuario);
 		echo json_encode($employee);
+
     }
 
     /**
@@ -70,7 +75,10 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::find($id);
+        $employee = DB::table('people')
+                      ->join('employees', 'employees.id', '=', 'people.peopleable_id')
+                      ->where('employees.id', $id)
+                      ->get();  
 
 		echo json_encode($employee);
     }

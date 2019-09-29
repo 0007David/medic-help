@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Patient;
 use App\Person;
-use DB;
 use Carbon;
 
 class PatientController extends Controller
@@ -17,12 +17,11 @@ class PatientController extends Controller
 	 */
 	public function index(){
 
-		$patients = Person::whereHasMorph('peopleable',[Patient::class])->get();
+		$patients = DB::table('people')
+                      ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+                      ->get();
 		
 		echo json_encode($patients);
-		
-
-		
 	}
 
 	/**
@@ -92,7 +91,10 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function show($id){
-		$patient = Patient::find($id);
+		$patient = DB::table('people')
+                      ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+                      ->where('patients.id', $id)
+                      ->get();
 
 		echo json_encode($patient);
 	}
