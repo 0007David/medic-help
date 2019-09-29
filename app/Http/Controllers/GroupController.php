@@ -14,19 +14,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        return Group::all();
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -35,7 +24,10 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group=new Group();
+        $group->descripcion=$request['descripcion'];
+        $group->nombre=$request['nombre'];
+        $group->save();
     }
 
     /**
@@ -44,20 +36,10 @@ class GroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Group  $group
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Group $group)
-    {
-        //
+    public function show(request $id)
+    {   
+        $group=Group::find($id['id']);
+        return Response()->json($group);
     }
 
     /**
@@ -67,9 +49,13 @@ class GroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(Request $request)
     {
-        //
+        $group= Group::find($request['id']);
+        $group->nombre=$request['nombre'];
+        $group->descripcion=$request['descripcion'];
+        $group->save();
+        return Response()->json($group);
     }
 
     /**
@@ -78,8 +64,9 @@ class GroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy(Request $request)
     {
-        //
+        $group=Group::findOrFail($request['id']);
+        $group->delete();
     }
 }

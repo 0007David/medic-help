@@ -25,13 +25,20 @@ Route::apiResource('employees', 'EmployeeController');
 Route::post('registrar','UsuarioController@registrar');
 Route::post('login','UsuarioController@login');
 
-    Route::group(['prefix'=>'security'], function (){
-        Route::get('index', 'SecurityController@index');
-        Route::post('store', 'SecurityController@store');
-        Route::post('show', 'SecurityController@show');
-        Route::post('update', 'SecurityController@update');
-        Route::post('destroy', 'SecurityController@destroy');
-    });
+Route::group(['prefix'=>'security'], function (){
+    Route::get('index', 'SecurityController@index');
+    Route::post('store', 'SecurityController@store');
+    Route::post('show', 'SecurityController@show');
+    Route::post('update', 'SecurityController@update');
+    Route::post('destroy', 'SecurityController@destroy');
+});
+Route::group(['prefix'=>'Group'], function (){
+    Route::get('index', 'GroupController@index');
+    Route::post('store', 'GroupController@store');
+    Route::post('show', 'GroupController@show');
+    Route::post('update', 'GroupController@update');
+    Route::post('destroy', 'GroupController@destroy');
+});
 
 
 
