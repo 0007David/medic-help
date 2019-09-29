@@ -125,11 +125,11 @@ class EmployeeController extends Controller
      * @param  \App\movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $employee = Employee::find($request->id);		
+        $employee = Employee::find($id);		
 		$employee->person()->update([
-            'estado'=>$request->estado
+            'estado'=>'d'
 		]);
         
     }
