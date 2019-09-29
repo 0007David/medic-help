@@ -47,7 +47,9 @@ class PatientController extends Controller
 			'nombre'=>$request->nombre,
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
-			'fecha_nacimiento'=>$request->fecha_nacimiento
+			'fecha_nacimiento'=>$request->fecha_nacimiento,
+			'email'=>$request->email,
+            'sexo'=>$request->sexo
 		]);
 
 		echo json_encode($patient);

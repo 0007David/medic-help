@@ -39,6 +39,20 @@ Route::group(['prefix'=>'Group'], function (){
     Route::post('update', 'GroupController@update');
     Route::post('destroy', 'GroupController@destroy');
 });
+Route::group(['prefix'=>'EmployeeGroup'], function (){
+    Route::get('index', 'EmployeeGroupController@index');
+    Route::post('store', 'EmployeeGroupController@store');
+    Route::post('show', 'EmployeeGroupController@show');
+    Route::post('update', 'EmployeeGroupController@update');
+    Route::post('destroy', 'EmployeeGroupController@destroy');
+});
+Route::group(['prefix'=>'Especialidad'], function (){
+    Route::get('index', 'EspecialidadController@index');
+    Route::post('store', 'EspecialidadController@store');
+    Route::post('show', 'EspecialidadController@show');
+    Route::post('update', 'EspecialidadController@update');
+    Route::post('destroy', 'EspecialidadController@destroy');
+});
 
 
 
