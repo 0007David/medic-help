@@ -19,12 +19,9 @@ class PatientController extends Controller
 
 		$patients = DB::table('people')
                       ->join('patients', 'patients.id', '=', 'people.peopleable_id')
-                      ->get(); 
+                      ->get();
 		
 		echo json_encode($patients);
-		
-
-		
 	}
 
 	/**
