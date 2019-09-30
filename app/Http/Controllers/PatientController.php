@@ -19,6 +19,7 @@ class PatientController extends Controller
 
 		$patients = DB::table('people')
                       ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+                      ->where('peopleable_type','App\Patient')
                       ->get();
 		
 		echo json_encode($patients);
@@ -74,12 +75,14 @@ class PatientController extends Controller
 		$patient = Patient::find($id);
 		$patient->nro_seguro = $request->nro_seguro;
 		$patient->save();
-		$patient->person()->create([
+		$patient->person()->update([
 			'ci'=> $request->ci,
 			'nombre'=>$request->nombre,
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
-			'fecha_nacimiento'=>$request->fecha_nacimiento
+			'fecha_nacimiento'=>$request->fecha_nacimiento,
+			'email'=>$request->email,
+            'sexo'=>$request->sexo
 		]);
 
 		echo json_encode($patient);
@@ -91,9 +94,13 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function show($id){
+		// $patient = DB::select('SELECT * FROM people, patients where patients.id= $id and people.peopleable_id = patients.id');
 		$patient = DB::table('people')
                       ->join('patients', 'patients.id', '=', 'people.peopleable_id')
-                      ->where('patients.id', $id)
+                      ->where([
+                      	['patients.id','=',$id],
+                      	['peopleable_type','=','App\Patient']
+                      ])
                       ->get();
 
 		echo json_encode($patient);
@@ -104,6 +111,11 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function destroy($id){
+
+		$patient = Patient::find($id);
+		$patient->estado = 'd';
+		$patient->save();
+	    echo json_encode($patient);	
 	
 	}
 

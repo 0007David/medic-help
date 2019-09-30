@@ -19,6 +19,7 @@ class EmployeeController extends Controller
     {
         $employees = DB::table('people')
                       ->join('employees', 'employees.id', '=', 'people.peopleable_id')
+                      ->where('peopleable_type','App\Employee')
                       ->get();    
 
 		echo json_encode($employees);
@@ -77,7 +78,10 @@ class EmployeeController extends Controller
     {
         $employee = DB::table('people')
                       ->join('employees', 'employees.id', '=', 'people.peopleable_id')
-                      ->where('employees.id', $id)
+                      ->where([
+                        ['employees.id','=',$id],
+                        ['peopleable_type','=','App\Employee']
+                      ])
                       ->get();  
 
 		echo json_encode($employee);
@@ -110,7 +114,10 @@ class EmployeeController extends Controller
 			'nombre'=>$request->nombre,
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
-			'fecha_nacimiento'=>$request->fecha_nacimiento
+			'fecha_nacimiento'=>$request->fecha_nacimiento,
+            'email'=>$request->email,
+            'sexo'=>$request->sexo,
+            'estado'=>$request->estado
 		]);
 
 		echo json_encode($employee);
@@ -124,6 +131,9 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        
+        $employee = Employee::find($id);
+        $employee->estado = "d";
+        $employee->save();
+        echo json_encode($employee);
     }
 }
