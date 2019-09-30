@@ -18,7 +18,8 @@ class PatientController extends Controller
 	public function index(){
 
 		$patients = DB::table('people')
-                      ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+					  ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+					  ->where('peopleable_type','App\Patient')
                       ->get();
 		
 		echo json_encode($patients);
@@ -93,7 +94,10 @@ class PatientController extends Controller
 	public function show($id){
 		$patient = DB::table('people')
                       ->join('patients', 'patients.id', '=', 'people.peopleable_id')
-                      ->where('patients.id', $id)
+                      ->where([
+						  ['patients.id','=',$id],
+						  ['peopleable_type','=','App\Patient']
+					  ])
                       ->get();
 
 		echo json_encode($patient);
