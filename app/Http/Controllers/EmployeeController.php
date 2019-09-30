@@ -75,7 +75,10 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::find($id);
+        $employee = DB::table('people')
+                      ->join('employees', 'employees.id', '=', 'people.peopleable_id')
+                      ->where('employees.id', $id)
+                      ->get();  
 
 		echo json_encode($employee);
     }

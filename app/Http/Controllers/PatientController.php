@@ -94,7 +94,10 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function show($id){
-		$patient = Patient::find($id);
+		$patient = DB::table('people')
+                      ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+                      ->where('patients.id', $id)
+                      ->get();
 
 		echo json_encode($patient);
 	}
