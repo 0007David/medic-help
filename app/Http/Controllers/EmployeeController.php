@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Person;
 use App\Employee;
 use App\Usuario;
@@ -16,7 +17,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Person::whereHasMorph('peopleable',[Employee::class])->get();
+        $employees = DB::table('people')
+                      ->join('employees', 'employees.id', '=', 'people.peopleable_id')
+                      ->get();    
 
 		echo json_encode($employees);
         
@@ -61,7 +64,7 @@ class EmployeeController extends Controller
         $usuario->save();
         echo json_encode($usuario);
 		echo json_encode($employee);
-        
+
     }
 
     /**
