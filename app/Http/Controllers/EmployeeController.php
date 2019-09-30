@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Person;
 use App\Employee;
+use App\Usuario;
 
 class EmployeeController extends Controller
 {
@@ -52,7 +53,12 @@ class EmployeeController extends Controller
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
 		]);
-
+        $usuario=new Usuario();
+        $usuario->nombre=$request->email;
+        $usuario->contraseña=bcrypt($request->ci);
+        $usuario->id_employee=$employee['id'];
+        $usuario->save();
+        echo json_encode($usuario);    
 		echo json_encode($employee);
     }
 
