@@ -49,7 +49,8 @@ class EmployeeController extends Controller
 			'telefono'=>$request->telefono,
             'fecha_nacimiento'=>$request->fecha_nacimiento,
             'email'=>$request->email,
-            'sexo'=>$request->sexo
+            'sexo'=>$request->sexo,
+            'estado'=>$request->estado
 		]);
 
 		echo json_encode($employee);
