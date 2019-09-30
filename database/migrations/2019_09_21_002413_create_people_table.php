@@ -22,6 +22,7 @@ class CreatePeopleTable extends Migration
             $table->date('fecha_nacimiento');
             $table->string('email');
             $table->char('sexo');
+            $table->char('estado');
             $table->integer('peopleable_id');
             $table->string('peopleable_type');
             $table->timestamps();
