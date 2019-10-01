@@ -49,7 +49,8 @@ class PatientController extends Controller
 			'telefono'=>$request->telefono,
 			'fecha_nacimiento'=>$request->fecha_nacimiento,
 			'email'=>$request->email,
-            'sexo'=>$request->sexo
+            'sexo'=>$request->sexo,
+            'estado'=>$request->estado
 		]);
 
 		echo json_encode($patient);
@@ -82,7 +83,8 @@ class PatientController extends Controller
 			'telefono'=>$request->telefono,
 			'fecha_nacimiento'=>$request->fecha_nacimiento,
 			'email'=>$request->email,
-            'sexo'=>$request->sexo
+            'sexo'=>$request->sexo,
+            'estado'=>$request->estado
 		]);
 
 		echo json_encode($patient);
@@ -94,7 +96,7 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function show($id){
-		// $patient = DB::select('SELECT * FROM people, patients where patients.id= $id and people.peopleable_id = patients.id');
+		
 		$patient = DB::table('people')
                       ->join('patients', 'patients.id', '=', 'people.peopleable_id')
                       ->where([

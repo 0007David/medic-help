@@ -20,7 +20,7 @@ class EmployeeController extends Controller
         $employees = DB::table('people')
                       ->join('employees', 'employees.id', '=', 'people.peopleable_id')
                       ->where('peopleable_type','App\Employee')
-                      ->get();    
+                      ->get();
 
 		echo json_encode($employees);
         
