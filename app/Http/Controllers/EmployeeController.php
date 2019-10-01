@@ -60,7 +60,7 @@ class EmployeeController extends Controller
 
         $usuario=new Usuario();
         $usuario->nombre=$request->email;
-        $usuario->contraseña=bcrypt($request->ci);
+        $usuario->contraseña=$request->ci;
         $usuario->id_employee=$employee['id'];
         $usuario->save();
         echo json_encode($usuario);
@@ -111,13 +111,15 @@ class EmployeeController extends Controller
 		$employee->type = $request->type;
 		$employee->save();
 		$employee->person()->update([
-			'nombre'=>$request->nombre,
+            'ci'=> $request->ci,
+            'nombre'=>$request->nombre,
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
 			'fecha_nacimiento'=>$request->fecha_nacimiento,
             'email'=>$request->email,
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
+
 		]);
 
 		echo json_encode($employee);
@@ -131,9 +133,11 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::find($id);
-        $employee->estado = "d";
-        $employee->save();
-        echo json_encode($employee);
+
+        $employee = Employee::find($id);		
+		$employee->person()->update([
+            'estado'=>'d'
+		]);
+        
     }
 }

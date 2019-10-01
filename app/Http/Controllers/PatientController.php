@@ -18,8 +18,8 @@ class PatientController extends Controller
 	public function index(){
 
 		$patients = DB::table('people')
-                      ->join('patients', 'patients.id', '=', 'people.peopleable_id')
-                      ->where('peopleable_type','App\Patient')
+					  ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+					  ->where('peopleable_type','App\Patient')
                       ->get();
 		
 		echo json_encode($patients);
@@ -100,9 +100,9 @@ class PatientController extends Controller
 		$patient = DB::table('people')
                       ->join('patients', 'patients.id', '=', 'people.peopleable_id')
                       ->where([
-                      	['patients.id','=',$id],
-                      	['peopleable_type','=','App\Patient']
-                      ])
+						  ['patients.id','=',$id],
+						  ['peopleable_type','=','App\Patient']
+					  ])
                       ->get();
 
 		echo json_encode($patient);
@@ -113,10 +113,11 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function destroy($id){
-
-		$patient = Patient::find($id);
-		$patient->estado = 'd';
-		$patient->save();
+		
+		$patient = Patient::find($id);		
+		$patient->person()->update([
+            'estado'=>'d'
+		]);
 	    echo json_encode($patient);	
 	
 	}
