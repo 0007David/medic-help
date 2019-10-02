@@ -28,10 +28,14 @@ class UsuarioController extends Controller
     {
         $nombre = $request->nombre;
         $contraseña = $request->contraseña;
-        if (Usuario::where('nombre', $nombre)->where('contraseña', $contraseña)->exists()) {
-            return "Success";
+        if (Usuario::where('nombre', $nombre)->exists()) {
+            if (Usuario::where('nombre', $nombre)->where('contraseña', $contraseña)->exists()){
+                return "Loged In";
+            }else{
+                return "Contraseña Incorrecta";
+            }
         } else {
-            return "Fail";
+            return "Usuario no existe";
         }
     }
     /**
