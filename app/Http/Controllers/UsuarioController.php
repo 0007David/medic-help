@@ -26,8 +26,8 @@ class UsuarioController extends Controller
 
     public function login(Request $request)
     {
-        $nombre = $request->nombre;
-        $contraseña = $request->contraseña;
+        $nombre = $request->email;
+        $contraseña = $request->password;
         if (Usuario::where('nombre', $nombre)->exists()) {
             if (Usuario::where('nombre', $nombre)->where('contraseña', $contraseña)->exists()){
                 return "Loged In";
