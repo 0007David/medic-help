@@ -16,10 +16,6 @@
 
 Route::get('/', function () {
 
-$users = DB::table('people')
-            ->join('employees', 'employees.id', '=', 'people.peopleable_id')
-            ->get();
-echo '<pre>'; print_r($users); echo '</pre>';
     return view('welcome');
 });
 

@@ -49,7 +49,8 @@ class PatientController extends Controller
 			'telefono'=>$request->telefono,
 			'fecha_nacimiento'=>$request->fecha_nacimiento,
 			'email'=>$request->email,
-            'sexo'=>$request->sexo
+            'sexo'=>$request->sexo,
+            'estado'=>$request->estado
 		]);
 
 		echo json_encode($patient);
@@ -75,12 +76,15 @@ class PatientController extends Controller
 		$patient = Patient::find($id);
 		$patient->nro_seguro = $request->nro_seguro;
 		$patient->save();
-		$patient->person()->create([
+		$patient->person()->update([
 			'ci'=> $request->ci,
 			'nombre'=>$request->nombre,
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
-			'fecha_nacimiento'=>$request->fecha_nacimiento
+			'fecha_nacimiento'=>$request->fecha_nacimiento,
+			'email'=>$request->email,
+            'sexo'=>$request->sexo,
+            'estado'=>$request->estado
 		]);
 
 		echo json_encode($patient);
@@ -92,6 +96,7 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function show($id){
+		
 		$patient = DB::table('people')
                       ->join('patients', 'patients.id', '=', 'people.peopleable_id')
                       ->where([
@@ -108,6 +113,12 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function destroy($id){
+		
+		$patient = Patient::find($id);		
+		$patient->person()->update([
+            'estado'=>'d'
+		]);
+	    echo json_encode($patient);	
 	
 	}
 
