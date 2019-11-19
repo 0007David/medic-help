@@ -57,7 +57,7 @@ class EmployeeController extends Controller
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
 		]);
-
+        echo '<pre>'; print_r($employee->id); echo '</pre>';
         $usuario=new Usuario();
         $usuario->nombre=$request->email;
         $usuario->contraseña=$request->ci;

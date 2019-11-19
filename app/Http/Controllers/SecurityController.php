@@ -29,6 +29,7 @@ class SecurityController extends Controller
     public function store(Request $request)
     {
         $nombre=$request['nombre'];
+        
         if(! Security::where('nombre', $nombre )->exists()){
             $security=new Security();
             $security->nombre=$request['nombre'];
