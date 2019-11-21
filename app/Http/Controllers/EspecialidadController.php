@@ -28,7 +28,8 @@ class EspecialidadController extends Controller
     public function store(Request $request)
     {
         $especialidad= new Especialidad();
-        $especialidad->nombre=$request['nombre'];
+        $especialidad->nombre=$request->nombre;
+        $especialidad->save();
         return $especialidad;
     }
 
