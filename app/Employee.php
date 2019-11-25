@@ -11,9 +11,9 @@ class Employee extends Model
         return $this->morphOne('App\Person', 'peopleable');
     }
 
-    // public function especialidads(){
-    //     return $this->belongsToMany('App\Especialidad')->using('App\EmpleadoEspecialidad');
-    // }
+    public function especialidads(){
+        return $this->belongsToMany('App\Especialidad')->using('App\EmpleadoEspecialidad');
+    }
 
     public function groups(){
 
