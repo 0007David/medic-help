@@ -19,12 +19,15 @@ class CreateDocumentsTable extends Migration
             $table->char('estado');
             $table->date('fecha_creacion');
             $table->text('observaciones');
-            $table->text('url_archivo');
+            $table->string('url_archivo');
 
-            
+            //Foreign Key Paciente
             $table->unsignedBigInteger('id_patient');
-
             $table->foreign('id_patient')->references('id')->on('patients');
+
+            //Foreign Key 
+            $table->unsignedBigInteger('id_employee');
+            $table->foreign('id_employee')->references('id')->on('employees');
 
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Patient;
 use App\Person;
+use App\User;
 use Carbon;
 
 class PatientController extends Controller
@@ -25,12 +26,21 @@ class PatientController extends Controller
 		echo json_encode($patients);
 	}
 
+	public function listarPacientes(){
+		$patients = DB::table('people')
+					  ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+					  ->where('peopleable_type','App\Patient')
+					  ->get();
+
+		return view('admin.pacientes.index')->with(compact('patients')); 
+	}
+
 	/**
 	 * Muestra el formulario donde insertar un datos a un modelo de la BBDD
 	 * @return 
 	 */
 	public function create(){
-
+		return view('admin.pacientes.create');
 	}
 
 	/**
@@ -54,9 +64,39 @@ class PatientController extends Controller
 		]);
 
 		echo json_encode($patient);
-
-
 	
+	}
+
+	public function alamcenarPaciente( Request $request){
+		$paciente = new Patient();
+		$paciente->nro_seguro = $request->nro_seguro;
+        $paciente->save();
+
+        $usuario=new User();
+        $usuario->name=$request->nombre;
+        $usuario->email = $request->email;
+        $usuario->estado= 'a';
+        $usuario->password=bcrypt($request->ci);
+		$usuario->save();
+
+		$user_id = User::all()->max('id');
+		echo '<pre>'; print_r($user_id); echo '</pre>';
+		echo 'console.log("'; $user_id; echo'");';
+
+		$paciente->person()->create([
+			'ci'=> $request->ci,
+			'nombre'=>$request->nombre,
+			'apellido'=>$request->apellido,
+			'telefono'=>$request->telefono,
+            'fecha_nacimiento'=>$request->fecha_nacimiento,
+            'email'=>$request->email,
+            'sexo'=>$request->sexo,
+            'estado'=> 'a',
+            'user_id' => $user_id,
+        ]);
+        // echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
+	
+        return redirect('/pacientes');
 	}
 
 	/**
