@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Especialidad;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 class EspecialidadController extends Controller
 {
     /**
@@ -16,6 +15,13 @@ class EspecialidadController extends Controller
     public function index()
     {
         return Especialidad::all();
+    }
+
+    public function index2(){
+        $especialidad = Especialidad::all();
+       // dd($especialidad);
+
+       return view('admin.especialidad')->with(compact("especialidad"));
     }
 
   

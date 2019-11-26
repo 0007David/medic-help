@@ -23,8 +23,8 @@ class CreatePeopleTable extends Migration
             $table->string('email');
             $table->char('sexo')->nullable();
             $table->char('estado')->nullable();
-            $table->integer('peopleable_id');
-            $table->string('peopleable_type');
+            $table->integer('peopleable_id'); //el id de employee o patient
+            $table->string('peopleable_type'); // it contains the class name of the parent model
             $table->timestamps();
         });
     }

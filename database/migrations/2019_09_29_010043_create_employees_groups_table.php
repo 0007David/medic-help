@@ -20,6 +20,12 @@ class CreateEmployeesGroupsTable extends Migration
             $table->foreign('id_employee')->references('id')->on('employees');
             $table->unsignedBigInteger('id_group');
             $table->foreign('id_group')->references('id')->on('groups');
+            $table->boolean('descargar');
+            $table->boolean('lectura');
+            $table->boolean('eliminar');
+            $table->string('rolGrupo');
+
+
         });
     }
 

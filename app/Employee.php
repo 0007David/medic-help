@@ -10,4 +10,9 @@ class Employee extends Model
     {
         return $this->morphOne('App\Person', 'peopleable');
     }
+
+    public function groups()
+    {
+        return $this->belongsToMany('App\Group');
+    }
 }
