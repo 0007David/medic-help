@@ -15,8 +15,8 @@ class CreateEspecialidadsTable extends Migration
     {
         Schema::create('especialidads', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
             $table->string('nombre');
+            $table->timestamps();
         });
     }
 

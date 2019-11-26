@@ -82,14 +82,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/empleados" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Empleados</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
+                <a href="/pacientes" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pacientes</p>
                 </a>
@@ -111,7 +111,7 @@
 
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-brush"></i>
               <p>
                 Temas
               </p>

@@ -11,8 +11,11 @@ class Group extends Model
         return $this->hasMany('App\Employee_Person');
     }
 
-    public function employees()
-    {
-        return $this->belongsToMany('App\Employee');
+    public function employees(){
+        return $this->belongsToMany('App\Employee')->using('App\employee_group');
+    }
+
+    public function documents(){
+        return $this->belongsToMany('App\Document')->using('App\DocumentGroup');
     }
 }

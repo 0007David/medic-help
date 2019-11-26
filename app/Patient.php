@@ -12,5 +12,9 @@ class Patient extends Model
         return $this->morphOne('App\Person', 'peopleable');
     }
 
+    public function documents(){
+        return $this->hasMany('App\Document');
+    }
+
 
 }
