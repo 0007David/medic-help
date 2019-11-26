@@ -70,15 +70,12 @@ class EmployeeController extends Controller
         $permisos = $request->permisos;
         
         foreach($permisos as $key => $permiso){
-            $team->teamMembers()->attach($team);
-            $team->save();
+
+            // $team->teamMembers()->attach($team);
+            // $team->save();
 
         }
 
-        
-
-
-        
         // echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
         
         // return redirect('/empleados');
