@@ -21,9 +21,10 @@ Route::get('/test', 'TestController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/especialidad', 'EspecialidadController@mostrarVista');
+Route::post('submit','EspecialidadController@store');
 
-
-
+Route::get('/editarEspecialidad', 'EspecialidadController@update');
 
 
 

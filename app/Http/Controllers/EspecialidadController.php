@@ -17,7 +17,11 @@ class EspecialidadController extends Controller
     {
         return Especialidad::all();
     }
-
+    public function mostrarVista()
+    {
+        $data = Especialidad::all();
+        return view('admin.especialidad.especialidad',['data'=>$data]);
+    }
   
     /**
      * Store a newly created resource in storage.
@@ -30,8 +34,12 @@ class EspecialidadController extends Controller
         $especialidad= new Especialidad();
         $especialidad->nombre=$request->nombre;
         $especialidad->save();
-        return $especialidad;
+        return redirect('/especialidad');
+        // return $especialidad;
+        // print_r($request->input());
     }
+
+
 
     /**
      * Display the specified resource.
@@ -52,12 +60,15 @@ class EspecialidadController extends Controller
      * @param  \App\Especialidad  $especialidad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+
+    // Request $request
+    public function update()
     {
-        $especialidad=Especialidad::findOrfail($request['id']);
-        $especialidad->nombre=$request['nombre'];
-        $especialidad->save();
-        return Response()->json($especialidad);
+        return view('admin.especialidad.especialidadEditar');
+        // $especialidad=Especialidad::findOrfail($request['id']);
+        // $especialidad->nombre=$request['nombre'];
+        // $especialidad->save();
+        // return Response()->json($especialidad);
 
     }
 
