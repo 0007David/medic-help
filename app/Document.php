@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
-    
+
+    public function services()
+    {
+        return $this->belongsTo('App\Service');
+
+    }
     public function patient(){
 
         return $this->belongsTo('App\Patient');

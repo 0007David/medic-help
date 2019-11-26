@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Service;
 use Illuminate\Http\Request;
-use App\Employee;
-use App\Group;
+use App\Http\Requests\StoreServiceRequest;
 
-class GroupController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return view('groups.index');
+        $services=Service::all();
+        return view('admin.services.index',compact('services'));
     }
 
     /**
@@ -25,26 +25,21 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('groups.create');
+        return view('admin.services.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
-        $group=new Group();
-        $group->nombre=$request->input('nombre');
-        $group->descripcion=$request->input('descripcion');
-        $group->save();
-
-        //Aqui falta encontrar al employee porque no hay base, por ahora voy a usar el id del user que esta loggeado, mas el grupo se relaciona con el 1ro. 
-        $employee=Employee::find(auth()->user()->id);
-        $group->employees()->attach((auth()->user()->id),['descargar'=>'true','eliminar'=>'true','lectura'=>'true', 'rolGrupo'=>'dueño']);
-        return 'saved';
+        $service= new Service();
+        $service->nombre=$request->input('nombre');
+        $service->save();
+        return redirect()->route('services.index')->with('status','Servicio agregado correctamente.');
     }
 
     /**
@@ -66,7 +61,8 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        //
+        $service= Service::find($id);
+        return view('admin.services.edit',compact("service"));
     }
 
     /**
@@ -76,9 +72,13 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreServiceRequest $request, $id)
     {
-        //
+        $service=Service::find($id);
+        $service->fill($request->all());
+        $service->save(); 
+        return redirect()->route('services.index')->with('status', 'Servicio actualizado correctamente.');
+        
     }
 
     /**

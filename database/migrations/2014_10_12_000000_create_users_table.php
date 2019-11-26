@@ -30,6 +30,10 @@ class CreateUsersTable extends Migration
             $table->foreign('tema_id')->references('id')->on('temas');
             
             $table->rememberToken();
+
+            $table->unsignedBigInteger('id_employee');
+            $table->foreign('id_employee')->references('id')->on('employees');
+
             $table->timestamps();
         });
     }
