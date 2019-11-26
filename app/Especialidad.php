@@ -10,9 +10,12 @@ class Especialidad extends Model
     //     return $this->hasMany('App\Empleado_Especialidad');
     // }
 
+    protected $fillable = ['nombre','estado'];
+    
+
     public function employees(){
 
-        return $this->belongsToMany('App\Employee')->using('App\EmpleadoEspecialidad');
+        return $this->belongsToMany('App\Employee','empleado_especialidads','empleado_id','especialidad_id')->using('App\EmpleadoEspecialidad');
 
     }
 

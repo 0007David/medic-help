@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class employee_group extends Pivot
 {
-    public function employee_group(){
-        return $this->belongsTo('App\Employee');
-    }
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = true;
 
-    public function comentarios(){
-        return $this->hasMany('App\Comentario');
-    }
 }

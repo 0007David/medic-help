@@ -21,7 +21,7 @@ class Permiso extends Model
     protected $fillable = ['nombre'];
 
     public function rols(){
-        return $this->belongsToMany('App\Rol')->using('App\RolPermiso');
+        return $this->belongsToMany('App\Rol','rol_permisos','permiso_id','rol_id')->using('App\RolPermiso');
 
     }
 }

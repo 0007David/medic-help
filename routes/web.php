@@ -22,9 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //CRUD EMPLEADO
 Route::get('/empleados', 'EmployeeController@mostrarVista');
 Route::post('empleado/store','EmployeeController@almacenarEmpleado');
-
 Route::get('/empleado/{id}/edit', 'EmployeeController@edit'); //formulario edit
-
 Route::get('/nuevo','EmployeeController@create');
 
 

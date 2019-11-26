@@ -22,7 +22,8 @@ class Rol extends Model
 
     public function permisos()
     {
-        return $this->belongsToMany('App\Permiso')->using('App\RolPermiso');
+        return $this->belongsToMany('App\Permiso','rol_permisos','rol_id','permiso_id')
+        ->using('App\RolPermiso');
     }
 
     public function users(){

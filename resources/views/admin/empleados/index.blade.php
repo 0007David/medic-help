@@ -11,13 +11,16 @@
   <div class="content-wrapper">
 
     <section class="content">
+      
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
               <h3 class="card-title">DataTable with minimal features &amp; hover style</h3>
           </div>
+          
           <div class="card-body">
+          
             <a href="/nuevo" class="btn btn-primary">Nuevo Empleado</a>
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -45,21 +48,13 @@
                         </a> </td>
                       <td> <button class="btn btn-primary">Eliminar</button> </td>
                     </tr>
-
                   @endforeach
-
-            
-
                 </tbody>
               </table>
-
           </div>
-
         </div>
       </div>
     </div>
-
-
     </section>
 
   </div>

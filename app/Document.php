@@ -15,12 +15,14 @@ class Document extends Model
 
     public function employee(){
 
-        return $this->belongsTo('App\Employee');
+        return $this->belongsTo('App\Employee');        
         
     }
 
     public function groups(){
-        return $this->belongsToMany('App\Group')->using('App\DocumentGroup');
+
+        return $this->belongsToMany('App\Group','document_groups','document_id','group_id')->using('App\DocumentGroup');
+
     }
 
     public function comentarios(){
