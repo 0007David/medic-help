@@ -15,16 +15,22 @@ class CreatePeopleTable extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ci');
+            $table->string('ci')->unique();
             $table->string('nombre');
             $table->string('apellido');
             $table->string('telefono');
             $table->date('fecha_nacimiento');
             $table->string('email');
-            $table->char('sexo')->nullable();
-            $table->char('estado')->nullable();
+            $table->string('imagen')->nullable();
+            $table->char('sexo',1)->nullable();
+            $table->char('estado',2)->nullable();
             $table->integer('peopleable_id');
             $table->string('peopleable_type');
+            
+            //Foreign Key
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            
             $table->timestamps();
         });
     }

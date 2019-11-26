@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Person;
 use App\Employee;
-use App\Usuario;
+use App\User;
 
 class EmployeeController extends Controller
 {
@@ -26,6 +26,50 @@ class EmployeeController extends Controller
         
     }
 
+    public function mostrarVista(){
+
+        $employees = DB::table('people')
+                      ->join('employees', 'employees.id', '=', 'people.peopleable_id')
+                      ->where('peopleable_type','App\Employee')
+                      ->get();
+
+        // echo '<pre>'; print_r($employees); echo '</pre>';
+
+        return view('admin.empleados.index')->with(compact('employees'));
+    }
+
+    public function almacenarEmpleado(Request $request){
+
+        $employee = new Employee();
+		$employee->type = $request->type;
+        $employee->save();
+
+        $usuario=new User();
+        $usuario->name=$request->nombre;
+        $usuario->email = $request->email;
+        $usuario->estado= 'a';
+        $usuario->password=bcrypt($request->ci);
+        $usuario->save();
+
+        $user_id = User::all()->max('id');
+
+		$employee->person()->create([
+			'ci'=> $request->ci,
+			'nombre'=>$request->nombre,
+			'apellido'=>$request->apellido,
+			'telefono'=>$request->telefono,
+            'fecha_nacimiento'=>$request->fecha_nacimiento,
+            'email'=>$request->email,
+            'sexo'=>$request->sexo,
+            'estado'=>'a',
+            'user_id' => $user_id ,
+        ]);
+        // echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
+        
+        return redirect('/empleados');
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,8 +77,10 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.empleados.create');
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -57,7 +103,7 @@ class EmployeeController extends Controller
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
 		]);
-        echo '<pre>'; print_r($employee->id); echo '</pre>';
+        // echo '<pre>'; print_r($employee->id); echo '</pre>';
         $usuario=new Usuario();
         $usuario->nombre=$request->email;
         $usuario->contraseña=$request->ci;

@@ -15,11 +15,19 @@ class CreateEmployeesGroupsTable extends Migration
     {
         Schema::create('employees_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            // FORRIGN KEY Empleado
             $table->unsignedBigInteger('id_employee');
             $table->foreign('id_employee')->references('id')->on('employees');
+            // FORRIGN KEY Grupos
             $table->unsignedBigInteger('id_group');
             $table->foreign('id_group')->references('id')->on('groups');
+
+            $table->boolean('descargar');
+            $table->boolean('lectura');
+            $table->boolean('ocultar');
+            $table->char('rolGrupo',2);
+
+            $table->timestamps();
         });
     }
 
