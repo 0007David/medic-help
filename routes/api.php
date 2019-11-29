@@ -56,6 +56,8 @@ Route::group(['prefix'=>'Especialidad'], function (){
     Route::post('destroy', 'EspecialidadController@destroy');
 });
 
-
+// API PARA REPORTES
+Route::post('/reporte','Api\ReporteController@storeReporte');
+// Route::post('/login','Api\LoginController@login');
 
 

@@ -51,6 +51,9 @@ Route::post('/roles/permisos/store', 'RolController@storePermiso');
 // TEMAS
 Route::get('/temas', 'TemaController@index');
 
+// REPORTES
+Route::get('/reportes','TestController@indexReporte');
+
 
 
 

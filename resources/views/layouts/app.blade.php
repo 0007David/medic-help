@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
+  <!-- Style Reportes -->
+  <link rel="stylesheet" href="{{asset('css/styles.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Fonts -->
@@ -122,5 +124,6 @@
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <!-- Archivo JS Medic-Help -->
 <script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>
