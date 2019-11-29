@@ -40,10 +40,9 @@
                       <td>{{$value->email}}</td>
                       <td>{{$value->telefono}}</td>
                       <td>{{$value->sexo}}</td>
-                      <td> <button class="btn btn-primary">Editar</button> </td>
-                      <td> <button class="btn btn-primary">Eliminar</button> </td>
+                      <td> <button class="btn btn-primary"><i class="fas fa-edit"></i></button> </td>
+                      <td> <button class="btn btn-danger"><i class="fas fa-eraser"></i></button> </td>
                     </tr>
-
                   @endforeach
 
             

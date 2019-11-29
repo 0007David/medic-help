@@ -26,27 +26,31 @@
                 <thead>
                 <tr>
                   <th>#</th>
+                  <th>CI</th>
                   <th>Nombre</th>
                   <th>Correo</th>
                   <th>Telefono</th>
                   <th>Sexo</th>
+                  <th>Fecha Nacimiento</th>
                   <th>&nbsp;</th>
                   <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
-
                   @foreach($employees as $key => $value)
                     <tr>
                       <td>{{$key+1}}</td>
+                      <td>{{$value->ci}}</td>
                       <td>{{$value->nombre ." ". $value->apellido}}</td>
                       <td>{{$value->email}}</td>
                       <td>{{$value->telefono}}</td>
                       <td>{{$value->sexo}}</td>
+                      <td>{{ \Carbon\Carbon::parse($value->fecha_nacimiento)->format('j F, Y') }}
+                      </td>
                       <td> <a href="{{ url('/empleado/'.$value->id.'/edit') }}" class="btn btn-primary">
-                            <i class="fa fa-collection"></i>
+                      <i class="fas fa-edit"></i>
                         </a> </td>
-                      <td> <button class="btn btn-primary">Eliminar</button> </td>
+                      <td> <button class="btn btn-danger"><i class="fas fa-eraser"></i></button> </td>
                     </tr>
                   @endforeach
                 </tbody>

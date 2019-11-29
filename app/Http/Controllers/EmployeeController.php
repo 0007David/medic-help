@@ -46,7 +46,7 @@ class EmployeeController extends Controller
         $employee->save();
         //Asignamos Usuario
         $usuario=new User();
-        $usuario->name=$request->userName;
+        $usuario->name=$request->nombre;
         $usuario->email = $request->email;
         $usuario->estado= 'a';
         $usuario->password=bcrypt(isset($request->password)? $request->password: $request->ci);
@@ -66,19 +66,9 @@ class EmployeeController extends Controller
             'user_id' => $user_id ,
         ]);
 
-        // Permisos
-        $permisos = $request->permisos;
-        
-        foreach($permisos as $key => $permiso){
-
-            // $team->teamMembers()->attach($team);
-            // $team->save();
-
-        }
-
         // echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
         
-        // return redirect('/empleados');
+        return redirect('/empleados');
 
     }
 

@@ -152,48 +152,7 @@
                           <option>ROL 2</option>
                           <option>ROL 3</option>
                         </select>
-                      </div>
-
-                  <h4>Permisos</h4>
-                  <!-- CAMPOS PERMISOS  -->
-                  <div class="row">
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="form-check">
-                          <input class="form-check-input" name="permisos[]" value="Modulo 1" type="checkbox">
-                          <label class="form-check-label">Modulo 1</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" name="permisos[]" value="Modulo 2" type="checkbox">
-                          <label class="form-check-label">Modulo 2</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" name="permisos[]" value="Modulo 3" type="checkbox">
-                          <label class="form-check-label">Modulo 3</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="form-check">
-                          <input class="form-check-input" name="permisos[]" value="Modulo 4" type="checkbox">
-                          <label class="form-check-label">Modulo 4</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" name="permisos[]" value="Modulo 5" type="checkbox">
-                          <label class="form-check-label">Modulo 5</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" name="permisos[]" value="Modulo 6" type="checkbox">
-                          <label class="form-check-label">Modulo 6</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  
-
-
+                      </div>              
                 </div>
                 <!-- /.card-body -->
 

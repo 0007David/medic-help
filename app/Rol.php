@@ -31,4 +31,18 @@ class Rol extends Model
         return $this->hasMany('App\User');
 
     }
+
+    public function existePermiso($permiso){
+        $permisos = $this->permisos()->get(); $salida=false;
+        
+        foreach($permisos as $key => $value ){
+            if($value->nombre == $permiso){
+                $salida = true;
+                break;
+            }
+        }
+
+        return $salida;
+    }
+
 }

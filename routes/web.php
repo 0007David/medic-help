@@ -35,13 +35,22 @@ Route::post('empleado/store','EmployeeController@almacenarEmpleado');
 Route::get('/empleado/{id}/edit', 'EmployeeController@edit'); //formulario edit
 Route::get('/nuevo','EmployeeController@create');
 
-
-
-
 // CRUD PACIENTE
 Route::get('/pacientes', 'PatientController@listarPacientes');
 Route::get('/nuevoPaciente', 'PatientController@create');
 Route::post('paciente/store','PatientController@alamcenarPaciente');
+
+// CRUD ROLES
+Route::get('/roles', 'RolController@index');
+Route::post('roles/store', 'RolController@store');
+Route::post('/ajaxSolicitud', 'RolController@show');
+Route::post('roles/edit', 'RolController@edit');
+Route::get('roles/{id}/permisos', 'RolController@getFormRoles');
+Route::post('/roles/permisos/store', 'RolController@storePermiso');
+
+// TEMAS
+Route::get('/temas', 'TemaController@index');
+
 
 
 

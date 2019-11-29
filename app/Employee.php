@@ -27,4 +27,10 @@ class Employee extends Model
     public function documents(){
         return $this->hasMany('App\Document');
     }
+
+    //accesor
+    public function getFechaNacAttribute(){
+        
+        return Carbon\Carbon::parse($this->fecha_nacimiento)->format('d/m/Y');
+    }
 }
