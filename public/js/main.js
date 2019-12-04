@@ -3,7 +3,7 @@
 
 let tabla = document.getElementById('tablaRol');
 
-let cuandoClickBotonAddProductoNotaCompra = (event) => {
+let cuandoClickBotonEditarRol = (event) => {
 	let click = event.target,btnSelecto;
 
 	if(click.tagName == 'BUTTON' || click.tagName == 'I'){
@@ -14,7 +14,7 @@ let cuandoClickBotonAddProductoNotaCompra = (event) => {
 			var datos = new FormData();
 			datos.append('id', id);
 			$.ajax({
-				headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
+				headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 				type: "post",
 				url: "/ajaxSolicitud",
 				data: datos,
@@ -44,43 +44,8 @@ let cuandoClickBotonAddProductoNotaCompra = (event) => {
 }
 
 if(tabla){
-
-	tabla.addEventListener('click', cuandoClickBotonAddProductoNotaCompra);
+	tabla.addEventListener('click', cuandoClickBotonEditarRol);
 }
-
-// Version con JQUERY
-// $(".miTabla").on('click','.btnEditRol', (e)=>{
-//     var id = $('.btnEditRol').attr('id_rol');
-    
-
-// 	console.log(id);
-// 	console.log(e.target)
-	
-// 	var datos = new FormData();
-//     datos.append('id', id);
-// 	console.log(datos.get('id'))
-// 	var data = {'id': id};
-    
-// 	$.ajax({
-//         headers: {
-//             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-//         },
-//         method: "POST",
-// 		url: "/ajaxSolicitud",
-// 		data: datos,
-// 		cache: false,
-//       	contentType: true,
-//         processData: false,
-//         dataType: 'json',
-// 		success: function(respuesta){
-// 			console.log(respuesta);
-			
-// 		}
-
-// 	})
-
-// });
-
 // CAMBIANDO TEMA
 $("#nombreTema").change( (e)=>{
 	let nombreTema = $("#nombreTema option:selected").val();
@@ -89,35 +54,172 @@ $("#nombreTema").change( (e)=>{
 	sidebar = document.getElementsByClassName('main-sidebar');
 	logoA = document.getElementById('logo');
 	switch (nombreTema){
+		case 'LIGHT':
+			cambiarTema(nav[0],logoA,sidebar[0]);
+			nav[0].classList.add('navbar-light');
+			sidebar[0].classList.add('sidebar-light-primary');	
+			logoA.classList.add('navbar-light');
+
+			break;
 		case 'BLUE':
-			cambiarTema(nav,logoA,sidebar);
-			nav[0].classList.remove('navbar-light');
-			nav[0].classList.remove('navbar-white');
+			cambiarTema(nav[0],logoA,sidebar[0]);
 			nav[0].classList.add('navbar-dark','navbar-primary');
-			sidebar[0].classList.remove('sidebar-dark-primary');
 			sidebar[0].classList.add('sidebar-light-primary');	
 			logoA.classList.add('navbar-primary');
 
 			break;
-			case 'DARK DRACULA':
-			cambiarTema(nav,logoA,sidebar);
-			nav[0].classList.remove('navbar-light');
-			nav[0].classList.remove('navbar-white');
+		case 'DARK DRACULA':
+			cambiarTema(nav[0],logoA,sidebar[0]);
 			nav[0].classList.add('navbar-dark');
-			sidebar[0].classList.remove('sidebar-dark-primary');
 			sidebar[0].classList.add('sidebar-dark-primary');	
 			logoA.classList.add('navbar-dark');
 			break;
-		default:
-			console.log('default');
+		case 'GREEN':
+			cambiarTema(nav[0],logoA,sidebar[0]);
+			nav[0].classList.add('navbar-dark','navbar-success');
+			sidebar[0].classList.add('sidebar-light-success');	
+			logoA.classList.add('navbar-success');
+			break;
+		case 'GRAY':
+			cambiarTema(nav[0],logoA,sidebar[0]);
+			nav[0].classList.add('navbar-dark','navbar-gray');
+			sidebar[0].classList.add('sidebar-light-teal');	
+			logoA.classList.add('navbar-gray');
+			break;
+	
+	}
+});
+$('#fuente').change(()=>{
+	let fuente = $("#fuente option:selected").val(); let body;
+	console.log(fuente)
+	body = document.getElementsByTagName('body');
+	if(fuente != "" && fuente != "default"){
+		body[0].style.cssText = "font-family: "+ fuente+';';
+	}else{
+		body[0].style.cssText = 'font-family: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol';
+	}
+
+})
+// Cuando Seleccione un Nro de Fuente
+$('#fontSize').change(()=>{
+	let nroFont = $("#fontSize option:selected").val(); 
+	let body = document.getElementsByTagName('body');
+	
+	console.log(nroFont)
+	switch (nroFont) {
+		case '8':
+			body[0].style.cssText = "font-size: 1rem;";
+		   console.log(body[0])
+		   
+		   break;
+		case '12':
+			body[0].style.cssText = "font-size: 1.1rem;";
+				console.log(body[0])
 		
 			break;
-	}
+		case '16':
+
+				body[0].style.cssText = "font-size: 1.2rem;";
+					console.log(body[0])
+			break;
+		case '24':
+
+				body[0].style.cssText = "font-size: 1.3rem;";
+				console.log(body[0])
+			break;
+		
+   }
+   
+
 })
 
 function cambiarTema(nav,logoA,sidebar){
-	console.log(nav);
-	console.log(logoA);
-	console.log(sidebar);
+
+	while(true)
+		if(nav.classList.length > 0){nav.classList.forEach(element => nav.classList.remove(element))}else{break}
+	nav.classList.add('main-header', 'navbar', 'navbar-expand');
+
+	while(true)
+		if(logoA.classList.length > 0){logoA.classList.forEach(element => {logoA.classList.remove(element)})}else{break}
+	logoA.classList.add('brand-link');
+
+	while(true) 
+		if(sidebar.classList.length > 0) {sidebar.classList.forEach(element => sidebar.classList.remove(element))}else{ break}
+	sidebar.classList.add('main-sidebar', 'elevation-4')
+}
+
+
+//BOTON DE SALIR
+let ulSalir = document.getElementsByTagName('nav');
+// $("#ulSalir").on('click','#liSalir', (e)=>{
+// 	e.preventDefault();
+// 	console.log('salir');
+// // let liSalir = document.getElementById('liSalir');
+// // divSalir
+// });
+let cuandoClickBotonSalir = (e)=>{
+console.log(e)
+
+}
+if(ulSalir){
+
+	ulSalir[0].addEventListener('click', cuandoClickBotonSalir);
+}
+
+window.onload =(()=>{
+	
+});
+
+function yourFunctionName (e){
+	var misCabeceras = new Headers({'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 'Content-Type': 'application/json'});
+	fetch('/fetchTema', {
+	 method: 'get',
+	 mode: 'no-cors',
+	 headers: misCabeceras,
+
+   }).then(res => res.json())
+   .catch(error => console.error('Error:', error))
+   .then(response => {
+	   if(response.status){
+		   let body = document.getElementsByTagName('body');
+		   switch (response.data.fontSize) {
+				case 8:
+					body[0].style.cssText = "font-size: 1rem;";
+				   break;
+				case 12:
+					body[0].style.cssText = "font-size: 1.1rem;";
+					break;
+				case 16:
+						body[0].style.cssText = "font-size: 1.2rem;";
+					break;
+				case 24:
+						body[0].style.cssText = "font-size: 1.3rem;";
+					break;
+		   }
+		   if(response.data.fuente == "default"){
+			body[0].style.cssText = "font-family: "+ 'font-family: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol;';
+		   }else{body[0].style.cssText = "font-family: "+ response.data.fuente+';';}
+		   
+		
+	   }
+	   
+	})
+	
+}
+
+if(window.attachEvent) {
+	window.attachEvent('onload', ()=> console.log('load 1'));
+	
+} else {
+    if(window.onload) {
+        var curronload = window.onload;
+        var newonload = function(evt) {
+            curronload(evt);
+            yourFunctionName(evt);
+        };
+        window.onload = newonload;
+    } else {
+        window.onload = yourFunctionName;
+    }
 }
 

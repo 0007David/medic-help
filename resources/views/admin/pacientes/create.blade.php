@@ -3,8 +3,12 @@
 @section('body-class','hold-transition sidebar-mini layout-fixed')
 @section('content')
 <div class="wrapper">
+  @section('nav-class', auth()->user()->tema_nav_bar)
   @include('includes.navbar')
-
+  
+  @section('aside-class', auth()->user()->tema_aside)
+  
+  @section('logoA-class', auth()->user()->tema_logo)
   @include('includes.aside')
 
   <!-- Content Wrapper. Contains page content -->
@@ -29,7 +33,7 @@
                     <label for="ci">CI</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                          <span class="input-group-text"><i class="far fa-id-card"></i></span>
                       </div>
                       <input type="text" class="form-control" id="ci" name="ci" placeholder="ci" required>
                     </div>  
@@ -40,7 +44,7 @@
                     <label for="name">Nombre</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                          <span class="input-group-text"><i class="far fa-user"></i></span>
                       </div>
                       <input type="text" class="form-control" id="name" name="nombre" placeholder="nombre" required>
                     </div>
@@ -51,7 +55,7 @@
                     <label for="lastName">Apellido</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                          <span class="input-group-text"><i class="fas fa-align-center"></i></span>
                       </div>
                       <input type="text" class="form-control" id="lastName" name="apellido" placeholder="apellido" required>
                     </div>
@@ -62,7 +66,7 @@
                     <label for="email">Email address</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                          <span class="input-group-text"><i class="far fa-envelope"></i></span>
                       </div>
                       <input type="email" class="form-control" id="email" name="email" placeholder="correo electronico" required>
                     </div>
@@ -82,7 +86,7 @@
                     <label for="password">Telefono</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        <span class="input-group-text"><i class="fas fa-phone-volume"></i></span>
                       </div>   
                       <input type="text" class="form-control" id="password" name="telefono" placeholder="telefono"> 
                     </div>
@@ -99,7 +103,7 @@
                   <!-- /.input group -->
                   </div>
                   <!-- CAMPO de Imagen -->
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exampleInputFile">Subir Imagen</label>
                     <div class="input-group">
                       <div class="custom-file">
@@ -110,7 +114,7 @@
                         <span class="input-group-text" id="">Upload</span>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- CAMPO Sexo -->
                   <div class="form-group">
                     <label for="sexo">Sexo</label>
@@ -135,7 +139,7 @@
                   <label for="password">Nro de Seguro</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        <span class="input-group-text"><i class="far fa-list-alt"></i></span>
                       </div>
                       <input type="text" class="form-control" name="nro_seguro">
                     </div>

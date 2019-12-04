@@ -21,12 +21,12 @@
             <p>
             <div class="card card-secondary">
               <div class="card-header">
-                <h3 class="card-title ">Formulario de Empleado</h3>
+                <h3 class="card-title ">Formulario editar empleado</h3>
               </div>
               <!-- /.card-header -->
 
               <!-- FORM STAR -->
-              <form role="form" method="post" action="{{ url('empleado/store') }}">
+              <form role="form" method="post" action="{{ url('empleado/'.$employee->id.'/update') }}">
                 @csrf
                 <div class="card-body">
                   <!-- CAMPO CI -->
@@ -36,7 +36,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="ci" name="ci" placeholder="ci" required>
+                      <input type="text" class="form-control" id="ci" name="ci" value="{{$employee->ci}}" readonly>
                     </div>  
                     
                   </div>
@@ -47,7 +47,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-user"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="name" name="nombre" placeholder="nombre" required>
+                      <input type="text" class="form-control" id="name" name="nombre" value="{{$employee->nombre}}" required>
                     </div>
                     
                   </div>
@@ -58,7 +58,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-align-center"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="lastName" name="apellido" placeholder="apellido" required>
+                      <input type="text" class="form-control" id="lastName" name="apellido" value="{{$employee->apellido}}" required>
                     </div>
                     
                   </div>
@@ -69,7 +69,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-envelope"></i></span>
                       </div>
-                      <input type="email" class="form-control" id="email" name="email" placeholder="correo electronico" required>
+                      <input type="email" class="form-control" id="email" name="email" value="{{$employee->email}}" required>
                     </div>
                   </div>
                   
@@ -80,7 +80,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-phone-volume"></i></span>
                       </div>   
-                      <input type="text" class="form-control" id="password" name="telefono" placeholder="telefono"> 
+                      <input type="text" class="form-control" id="password" name="telefono" value="{{$employee->telefono}}"> 
                     </div>
                   </div>
                   <!-- CAMPO Fecha_Nacimiento -->
@@ -90,7 +90,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                       </div>
-                      <input type="date" class="form-control" name="fecha_nacimiento" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="" im-insert="true">
+                      <input type="text" class="form-control" name="fecha_nacimiento" value="{{$employee->fecha_nacimiento}}" readonly>
                     </div>
                   <!-- /.input group -->
                   </div>
@@ -101,55 +101,55 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-check">
+                        @if($employee->sexo == 'm')
+                          <input class="form-check-input" type="radio" name="sexo" value="m" checked>
+                        @else
                           <input class="form-check-input" type="radio" name="sexo" value="m">
+                        @endif
                           <label class="form-check-label">Masculino</label>
                         </div>
                       </div> 
                       <div class="cold-md-6">
                         <div class="form-check">
                           <!-- <input  type="radio" name="sexo" value="f"> -->
-                          <input type="radio" class="form-check-input" id="sexo" name="sexo" value="f">
+                          @if($employee->sexo == 'f')
+                            <input class="form-check-input" type="radio" name="sexo" value="f" checked>
+                            @else
+                            <input class="form-check-input" type="radio" name="sexo" value="f">
+                            @endif
                           <label class="form-check-label">Femenino</label>
                         </div>
                       </div>
                     </div>
                   </div>
                   <!-- Campo type -->
-                  <!--<div class="form-group col-md-8 offset-md-2">
-                    <label>Tipo</label>
+                  <!-- <div class="form-group">
+                  <label for="password">Tipo</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="far fa-list-alt"></i></span>
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                       </div>
-                      <select class="form-control" name="type" required>
-                      <option selected>Seleccione uno opcion</option>
-                      <option value="Doctor">Doctor</option>
-                      <option value="Enfermera"> Enfermera</option>
-                      <option value="Recepcionista"> Recepcionista</option>
-                    </select>
+                      <input type="text" class="form-control" name="type" value="{{$employee->type}}">
                     </div>
-                  </div>      -->
+                  </div> -->
+                  
+                  
                   <!-- ROL -->
-                  <div class="form-group col-md-8 offset-md-2">
-                        <label>ROL</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-list-alt"></i></span>
-                          </div>
-                          <select class="form-control" name="rol" required>
-                          <option>ROL 1</option>
-                          <option>ROL 2</option>
-                          <option>ROL 3</option>
-                        </select>
-
-                        </div>
-                        
-                      </div>              
+                  <div class="form-group">
+                  <label for="rol">Fecha Nacimiento</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-list-alt"></i></span>
+                      </div>
+                      <input type="text" class="form-control" value="Rol" name="rol" readonly>
+                    </div>
+                  <!-- /.input group -->
+                  </div>         
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
+                  <button type="submit" class="btn btn-primary">Editar</button>
                   <a href="{{ url('/empleados') }}" class="btn btn-default">cancelar</a>
                 </div>
               </form>

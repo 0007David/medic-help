@@ -32,6 +32,10 @@ class EmployeeController extends Controller
                       ->join('employees', 'employees.id', '=', 'people.peopleable_id')
                       ->where('peopleable_type','App\Employee')
                       ->get();
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'obtener una lista de empleados';
+        LogController::storeLog('GET','obtener','Employee',$quien,$descripcion);
 
         // echo '<pre>'; print_r($employees); echo '</pre>';
 
@@ -42,14 +46,14 @@ class EmployeeController extends Controller
         // dd($request->request);
         //Creamos Empleado
         $employee = new Employee();
-		$employee->type = $request->type;
+		$employee->type = null;
         $employee->save();
         //Asignamos Usuario
         $usuario=new User();
         $usuario->name=$request->nombre;
         $usuario->email = $request->email;
         $usuario->estado= 'a';
-        $usuario->password=bcrypt(isset($request->password)? $request->password: $request->ci);
+        $usuario->password=bcrypt($request->ci);
         $usuario->save();
 
         $user_id = User::all()->max('id');
@@ -65,6 +69,10 @@ class EmployeeController extends Controller
             'estado'=>'a',
             'user_id' => $user_id ,
         ]);
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'almaceno al empleado: '. $request->nombre;
+        LogController::storeLog('POST','almacenar','Employee',$quien,$descripcion);
 
         // echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
         
@@ -130,7 +138,7 @@ class EmployeeController extends Controller
                         ['employees.id','=',$id],
                         ['peopleable_type','=','App\Employee']
                       ])
-                      ->get();  
+                      ->get()->first();  
 
 		echo json_encode($employee);
     }
@@ -141,8 +149,17 @@ class EmployeeController extends Controller
      * @param  \App\movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function edit(movie $movie)
+    public function edit(Request $request)
     {
+        $employee = $this->getEmployee($request->id);
+
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'obtener vista editar';
+        LogController::storeLog('GET','obtener','Employee',$quien,$descripcion);
+
+        // dd($employee);
+        return view('admin.empleados.edit')->with(compact('employee'));
         
     }
 
@@ -155,8 +172,9 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $employee = Employee::find($id);
-		$employee->type = $request->type;
+		$employee->type = null;
 		$employee->save();
 		$employee->person()->update([
             'ci'=> $request->ci,
@@ -170,7 +188,8 @@ class EmployeeController extends Controller
 
 		]);
 
-		echo json_encode($employee);
+        // echo json_encode($employee);
+        return redirect('/empleados');
     }
 
     /**
@@ -187,5 +206,16 @@ class EmployeeController extends Controller
             'estado'=>'d'
 		]);
         
+    }
+
+    public function getEmployee($id){
+
+        return DB::table('people')
+                      ->join('employees', 'employees.id', '=', 'people.peopleable_id')
+                      ->where([
+                        ['employees.id','=',$id],
+                        ['peopleable_type','=','App\Employee']
+                      ])->get()->first(); 
+
     }
 }

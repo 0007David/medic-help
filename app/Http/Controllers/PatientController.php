@@ -80,8 +80,8 @@ class PatientController extends Controller
 		$usuario->save();
 
 		$user_id = User::all()->max('id');
-		echo '<pre>'; print_r($user_id); echo '</pre>';
-		echo 'console.log("'; $user_id; echo'");';
+		// echo '<pre>'; print_r($user_id); echo '</pre>';
+		// echo 'console.log("'; $user_id; echo'");';
 
 		$paciente->person()->create([
 			'ci'=> $request->ci,
@@ -103,7 +103,11 @@ class PatientController extends Controller
 	 * Metodo que devuelve el formulario para editar los datos de un modelo de la BBDD
 	 * @return 
 	 */
-	public function edit(){
+	public function edit(Request $request){
+
+		$paciente = $this->getPatient($request->id);
+
+		return view('admin.pacientes.edit')->with(compact('paciente'));
 	
 	}
 
@@ -127,7 +131,7 @@ class PatientController extends Controller
             'estado'=>$request->estado
 		]);
 
-		echo json_encode($patient);
+		return redirect('/pacientes');
 	
 	}
 
@@ -160,6 +164,16 @@ class PatientController extends Controller
 		]);
 	    echo json_encode($patient);	
 	
+	}
+
+	public function getPatient($id){
+		return DB::table('people')
+		->join('patients', 'patients.id', '=', 'people.peopleable_id')
+		->where([
+			['patients.id','=',$id],
+			['peopleable_type','=','App\Patient']
+		])
+		->get()->first();
 	}
 
 }

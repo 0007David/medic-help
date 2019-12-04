@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tema;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class TemaController extends Controller
 {
@@ -13,6 +16,10 @@ class TemaController extends Controller
      */
     public function index()
     {
+        // storeLog($tipo,$accion ,$tabla, $quien,$descripcion)
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'peticion del formulario de temas';
+        LogController::storeLog('GET','obtener','Temas',$quien,$descripcion);
         return view('temas.index');
     }
 
@@ -23,7 +30,7 @@ class TemaController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +41,31 @@ class TemaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'almacena un tema';
+        LogController::storeLog('POST','almacenar','Temas',$quien,$descripcion);
+
+        
+        $userActual = User::find(Auth()->user()->id);
+        if( !isset($userActual->tema) ){
+            $tema = new Tema();
+            $tema->nombre = $request->nombre;
+            $tema->fuente = $request->fuente;
+            $tema->fontSize = $request->fontSize;
+            $tema->save();
+            $idTema = Tema::all()->max()->id;
+        }else{
+            $tema = Tema::find($userActual->tema->id);
+            $tema->nombre = $request->nombre;
+            $tema->fuente = $request->fuente;
+            $tema->fontSize = $request->fontSize;
+            $tema->save();
+            $idTema = $userActual->tema->id;
+        }
+        $userActual->tema_id = $idTema;
+        $userActual->save();
+        
+        return redirect('/home');
     }
 
     /**
@@ -43,9 +74,17 @@ class TemaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $userActual = User::find(Auth()->user()->id); $answer= array();
+        if(isset($userActual->tema)){
+            $tema = $userActual->tema;
+            $answer['status'] = true;
+            $answer['data'] = $tema;
+        }else{
+            $answer['status'] = false;
+        }
+        return response()->json($answer);
     }
 
     /**

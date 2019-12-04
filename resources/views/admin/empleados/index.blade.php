@@ -3,8 +3,12 @@
 @section('body-class','hold-transition sidebar-mini layout-fixed')
 @section('content')
 <div class="wrapper">
+  @section('nav-class', auth()->user()->tema_nav_bar)
   @include('includes.navbar')
-
+  
+  @section('aside-class', auth()->user()->tema_aside)
+  
+  @section('logoA-class-class', auth()->user()->tema_logo)
   @include('includes.aside')
 
   <!-- Content Wrapper. Contains page content -->
@@ -16,12 +20,12 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features &amp; hover style</h3>
+              <h3 class="card-title">Lista de Empleados del Sistemas</h3>
           </div>
           
           <div class="card-body">
           
-            <a href="/nuevo" class="btn btn-primary">Nuevo Empleado</a>
+            <a href="/empleado" class="btn btn-primary">Nuevo Empleado</a>
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>

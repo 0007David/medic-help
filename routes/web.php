@@ -31,14 +31,17 @@ Route::resource('groups','GroupController');
 
 //CRUD EMPLEADO
 Route::get('/empleados', 'EmployeeController@mostrarVista');
+Route::get('/empleado','EmployeeController@create'); // formulario save
 Route::post('empleado/store','EmployeeController@almacenarEmpleado');
 Route::get('/empleado/{id}/edit', 'EmployeeController@edit'); //formulario edit
-Route::get('/nuevo','EmployeeController@create');
+Route::post('empleado/{id}/update','EmployeeController@update');
 
 // CRUD PACIENTE
 Route::get('/pacientes', 'PatientController@listarPacientes');
-Route::get('/nuevoPaciente', 'PatientController@create');
+Route::get('/paciente', 'PatientController@create');
 Route::post('paciente/store','PatientController@alamcenarPaciente');
+Route::get('/paciente/{id}/edit','PatientController@edit');
+Route::post('/paciente/{id}/update','PatientController@update');
 
 // CRUD ROLES
 Route::get('/roles', 'RolController@index');
@@ -50,6 +53,8 @@ Route::post('/roles/permisos/store', 'RolController@storePermiso');
 
 // TEMAS
 Route::get('/temas', 'TemaController@index');
+Route::post('/temas/store', 'TemaController@store');
+Route::get('/fetchTema', 'TemaController@show');
 
 // REPORTES
 Route::get('/reportes','TestController@indexReporte');

@@ -1,5 +1,5 @@
 <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="@yield('nav-class')">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
