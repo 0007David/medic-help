@@ -18,7 +18,7 @@
     <section class="content" id="contenido_principal">
   
     	<div class="container-fluid" >
-    		<h1>Hola Bienvenido  Sr. {{ auth()->user()->name }}</h1>
+    		<h1>Hola Bienvenido   {{ auth()->user()->name }}</h1>
 
 
 	

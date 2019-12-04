@@ -1,4 +1,4 @@
-//console.log('hola');
+
 function cargarFormularioPerfil(id_usuario){
 //funcion para cargar la vista de editar perfil de usuario
 	$("#capa_modal").show();
@@ -12,17 +12,45 @@ function cargarFormularioPerfil(id_usuario){
 
 }
 
+function mostrarFormularioDoc(id_usuario){
+//funcion para mostrar vista de cargar documento
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+    var url = "mostrarFormVista/"+id_usuario+"";
+    $("#capa_para_edicion").html($("#cargador_empresa").html());
+    $.get(url,function(resul){
+        $("#capa_para_edicion").html(resul);
+    })
+        
+
+}
+
+function borrarDocumento1(arg){
+  var url="borrar_Documento/"+arg+"" ;
+  var divresul="notificacion_resul_fapu";
+  $("#"+divresul+"").html($("#cargador_empresa").html());
+
+  $.get(url,function(resul){
+    $("#"+divresul+"").html(resul);
+    
+  })
+
+
+}
+
+
+
+//atrapando los la imagen y el documento de un formulario
   $(document).on("submit",".formarchivo",function(e){
 
-     
         e.preventDefault();
         var formu=$(this);
         var nombreform=$(this).attr("id");
 
         if(nombreform=="f_subir_imagen" ){ var miurl="subir_imagen_usuario";  var divresul="notificacion_resul_fci"}
+        if(nombreform=="f_agregar_documento"){ var miurl="subir_archivo_usuario"; var divresul="notificacion_resul_fap"}
         //información del formulario
         var formData = new FormData($("#"+nombreform+"")[0]);
-        
         //hacemos la petición ajax   
         $.ajax({
             url: miurl,  
@@ -52,9 +80,8 @@ function cargarFormularioPerfil(id_usuario){
         });
     });
 
+//atrapando los datos de entrada de editar perfil
  $(document).on("submit",".form_entrada",function(e){
-
-//funcion para atrapar los formularios y enviar los datos
 
        e.preventDefault();
         
@@ -62,33 +89,23 @@ function cargarFormularioPerfil(id_usuario){
         
         var formu=$(this);
         var quien=$(this).attr("id");
-        
-        if(quien=="f_nuevo_usuario"){ var varurl="agregar_nuevo_usuario"; var divresul="notificacion_resul_fanu"; }
         if(quien=="f_editar_usuario"){ var varurl="editar_usuario"; var divresul="notificacion_resul_feu"; }
         if(quien=="f_cambiar_password"){ var varurl="cambiar_password"; var divresul="notificacion_resul_fcp"; }
-   
-   
-   
+     
         $("#"+divresul+"").html($("#cargador_empresa").html());
 
-              $.ajax({
+        $.ajax({
 
-                    type: "POST",
-                    url : varurl,
-                    datatype:'json',
-                    data : formu.serialize(),
-                    success : function(resul){
+            type: "POST",
+            url : varurl,
+            datatype:'json',
+            data : formu.serialize(),
+            success : function(resul){
 
-                        $("#"+divresul+"").html(resul);
-                        if(quien=="f_nuevo_usuario"){
-                         $('#'+quien+'').trigger("reset");
-                        }
-
-
-
-                    }
-
-                });
-
+                $("#"+divresul+"").html(resul);
+                $('#'+quien+'').trigger("reset");
+                
+            }
+        });
 
 });

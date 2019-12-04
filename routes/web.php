@@ -18,11 +18,20 @@ Route::get('/test', 'TestController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+//gestionar perfil
 Route::get('formEditPerfil/{id}','UsuarioController@formEditPerfil');
 
 Route::post('subir_imagen_usuario', 'UsuarioController@subir_imagen_usuario');
-
 Route::post('editar_usuario', 'UsuarioController@editar_usuario');
+Route::get('f_cambiar_password','UsuarioController@cambiar_password');
+
+//gestionar archivos
+Route::get('mostrarFormVista/{id}','DocumentController@vistaAddDocumento');
+Route::post('subir_archivo_usuario', 'DocumentController@agregarDocumento');
+Route::get('borrar_Documento/{id}','DocumentController@borrar_Documentos');
+Route::get('descargar_Documento/{id}','DocumentController@descargarDocumento');
+
 
 
 

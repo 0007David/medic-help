@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Patient;
+use App\User;
 use App\Person;
 use Carbon;
 
@@ -32,6 +33,7 @@ class PatientController extends Controller
 	public function create(){
 
 	}
+
 
 	/**
 	 * Metodo que inserta los datos de un modelo de la BBDD

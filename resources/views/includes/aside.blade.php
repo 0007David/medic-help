@@ -12,11 +12,12 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+           <?php if($usuario->imagenurl==""){ $usuario->imagenurl="imagenes/avatar.jpg"; }  ?>
           <img src="{{ Auth()->user()->imagenurl }}" class="img-circle elevation-2" alt="User Image" style="width: 50px; height: 50px;">
         </div>
         <div class="info">
           
-        <li class="nav-item d-none d-sm-inline-block"><a href="javascript:void(0);" class="nav-link" onclick="cargarFormularioPerfil(<?=auth()->user()->id ?>);" >{{ Auth()->user()->name }}</a></li>
+        <li class="nav-item d-none d-sm-inline-block"><a href="javascript:void(0);" class="nav-link" onclick="cargarFormularioPerfil(<?=auth()->user()->id ?>);" >Usuario:{{ Auth()->user()->name }}</a></li>
 
         </div>
       </div>
@@ -37,14 +38,23 @@
             
           </li>
 
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Documentos
-              </p>
-            </a>
-          </li>
+            <!--Gestionar documentos-->
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link active">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>Documentos<i class="right fas fa-angle-left"></i></p>
+              </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <!--Agregar documentos -->
+                     <a href="javascript:void(0);" onclick="mostrarFormularioDoc(<?=$usuario->id ?>);" class="nav-link active">
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>Cargar Documentos</p>
+                      </a>
+                  </li>
+
+                </ul>
+            </li>
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Usuario;
 use App\User;
+use App\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -45,9 +46,12 @@ class UsuarioController extends Controller
     public function formEditPerfil($id){
         //funcion para retornar una plantilla con datos del usuario
         $usuario = user::find($id);
+        $persona = Person::find($id);
         $contador = count($usuario);
         if ($contador>0) {
-            return view("formularios.formEditPerfil")->with("usuario",$usuario);
+            return view("formularios.formEditPerfil")
+            ->with("usuario",$usuario)
+            ->with("persona",$persona);
         }else
         {
 
@@ -57,16 +61,28 @@ class UsuarioController extends Controller
 
     public function editar_usuario(Request $request)
     {
-
+        $sex = '';
         $data=$request->all();
         $idUsuario=$data["id_usuario"];
         $usuario=User::find($idUsuario);
+        $persona=Person::find($idUsuario);
         $usuario->name  =  $data["nombres"];
         $usuario->email=$data["email"];
-        
+        $persona->apellido=$data["apellido"];
+        $persona->telefono=$data["telefono"];
+        $persona->fecha_nacimiento=$data["fecha_nacimiento"];
+        if ($data["sexo"]=="Masculino" or $data["sexo"]=="masculino") {
+            $sex = 'M';
+        }elseif ($data["sexo"]=="Femenino" or $data["sexo"]=="femenino" ) {
+            $sex = 'F';
+        }elseif (  $data["sexo"]!='') {
+            $sex = 'O';
+        }
+        $persona->sexo=$sex;
+        $res= $persona->save();
         $resul= $usuario->save();
 
-        if($resul){            
+        if($resul and $res){            
             return view("mensajes.msj_correcto")->with("msj","Datos actualizados Correctamente");   
         }
         else
@@ -110,6 +126,25 @@ class UsuarioController extends Controller
                 
             }
 
+        }
+    }
+
+    public function f_cambiar_password(Request $request)
+    {
+        $id=$request->input("id_usuario_password");
+        $email=$request->input("email_usuario");
+        $password=$request->input("password_usuario");
+        $usuario=User::find($id);
+        $usuario->email=$email;
+        $usuario->password=bcrypt($password);
+        $r=$usuario->save();
+
+        if($r){
+           return view("mensajes.msj_correcto")->with("msj","password actualizado");
+        }
+        else
+        {
+            return view("mensajes.msj_rechazado")->with("msj","Error al actualizar el password");
         }
     }
     /**
