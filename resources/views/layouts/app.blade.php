@@ -109,10 +109,6 @@
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 85b5b65a05b448f5197f7a870ec468f4243ae660
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
