@@ -39,16 +39,17 @@ class EmployeeController extends Controller
     }
 
     public function almacenarEmpleado(Request $request){
-
+        // dd($request->request);
+        //Creamos Empleado
         $employee = new Employee();
 		$employee->type = $request->type;
         $employee->save();
-
+        //Asignamos Usuario
         $usuario=new User();
-        $usuario->name=$request->nombre;
+        $usuario->name=$request->userName;
         $usuario->email = $request->email;
         $usuario->estado= 'a';
-        $usuario->password=bcrypt($request->ci);
+        $usuario->password=bcrypt(isset($request->password)? $request->password: $request->ci);
         $usuario->save();
 
         $user_id = User::all()->max('id');
@@ -64,9 +65,20 @@ class EmployeeController extends Controller
             'estado'=>'a',
             'user_id' => $user_id ,
         ]);
+
+        // Permisos
+        $permisos = $request->permisos;
+        
+        foreach($permisos as $key => $permiso){
+
+            // $team->teamMembers()->attach($team);
+            // $team->save();
+
+        }
+
         // echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
         
-        return redirect('/empleados');
+        // return redirect('/empleados');
 
     }
 

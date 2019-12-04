@@ -14,6 +14,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8 offset-md-2">
+            <p>
             <div class="card card-secondary">
               <div class="card-header">
                 <h3 class="card-title ">Formulario de Empleado</h3>
@@ -67,16 +68,7 @@
                       <input type="email" class="form-control" id="email" name="email" placeholder="correo electronico" required>
                     </div>
                   </div>
-                  <!-- Campo contraseña -->
-                  <!-- <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                      </div>   
-                      <input type="password" class="form-control" id="password" placeholder="contraseña"> 
-                    </div>
-                  </div> -->
+                  
                   <!-- CAMPO Telefono -->
                   <div class="form-group">
                     <label for="password">Telefono</label>
@@ -98,19 +90,7 @@
                     </div>
                   <!-- /.input group -->
                   </div>
-                  <!-- CAMPO de Imagen -->
-                  <div class="form-group">
-                    <label for="exampleInputFile">Subir Imagen</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="file-image" name="imagen">
-                        <label class="custom-file-label" for="file-image">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
-                      </div>
-                    </div>
-                  </div>
+      
                   <!-- CAMPO Sexo -->
                   <div class="form-group">
                     <label for="sexo">Sexo</label>
@@ -141,6 +121,78 @@
                     </div>
                   <!-- /.input group -->
                   </div>
+                  <h4>Usuario</h4>
+                  <!-- CAMPO Nombre de Usuario -->
+                  <div class="form-group">
+                  <label for="password">Nombre Usuario</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                      </div>
+                      <input type="text" class="form-control" name="userName">
+                    </div>
+                  <!-- /.input group -->
+                  </div>
+
+                  <!-- Campo contraseña -->
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                      </div>   
+                      <input type="password" class="form-control" id="password" name="password" placeholder="contraseña"> 
+                    </div>
+                  </div>
+                  <!-- ROL -->
+                  <div class="form-group col-md-8 offset-md-2">
+                        <label>ROL</label>
+                        <select class="form-control" name="rol">
+                          <option>ROL 1</option>
+                          <option>ROL 2</option>
+                          <option>ROL 3</option>
+                        </select>
+                      </div>
+
+                  <h4>Permisos</h4>
+                  <!-- CAMPOS PERMISOS  -->
+                  <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" name="permisos[]" value="Modulo 1" type="checkbox">
+                          <label class="form-check-label">Modulo 1</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" name="permisos[]" value="Modulo 2" type="checkbox">
+                          <label class="form-check-label">Modulo 2</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" name="permisos[]" value="Modulo 3" type="checkbox">
+                          <label class="form-check-label">Modulo 3</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" name="permisos[]" value="Modulo 4" type="checkbox">
+                          <label class="form-check-label">Modulo 4</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" name="permisos[]" value="Modulo 5" type="checkbox">
+                          <label class="form-check-label">Modulo 5</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" name="permisos[]" value="Modulo 6" type="checkbox">
+                          <label class="form-check-label">Modulo 6</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+
 
                 </div>
                 <!-- /.card-body -->

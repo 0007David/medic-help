@@ -22,8 +22,10 @@ use Illuminate\Http\Request;
 Route::apiResource('patients', 'PatientController');
 Route::apiResource('employees', 'EmployeeController');
 
+Route::post('/login','Api\LoginController@login');
+
 Route::post('registrar','UsuarioController@registrar');
-Route::post('login','UsuarioController@login');
+// Route::post('login','UsuarioController@login');
 
 Route::group(['prefix'=>'security'], function (){
     Route::get('index', 'SecurityController@index');
