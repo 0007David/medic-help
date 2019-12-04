@@ -56,8 +56,17 @@ Route::group(['prefix'=>'Especialidad'], function (){
     Route::post('destroy', 'EspecialidadController@destroy');
 });
 
+
 // API PARA REPORTES
 Route::post('/reporte','Api\ReporteController@storeReporte');
 // Route::post('/login','Api\LoginController@login');
+
+//BEGIN RUTAS API ESPECIALIDAD
+Route::get('Especialidad/list', 'Api\EspecialidadApiController@list');
+Route::get('Especialidad/list/{id}', 'Api\EspecialidadApiController@getEspecialidad');
+Route::post('Especialidad/insert', 'Api\EspecialidadApiController@insert');
+Route::put('Especialidad/update/{id}', 'Api\EspecialidadApiController@update');
+Route::post('Especialidad/delete/{id}', 'Api\EspecialidadApiController@delete');
+//END RUTAS API ESPECIALIDAD
 
 

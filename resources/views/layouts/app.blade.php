@@ -122,9 +122,14 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
 
+<!-- DataTables -->
+<script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+
 <!-- Archivo JS Medic-Help -->
 <!-- <script src="{{asset('js/app.js')}}"></script> -->
 <script src="{{asset('js/main.js')}}"></script>
+
 
 </body>
 </html>

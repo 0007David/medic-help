@@ -30,7 +30,6 @@ class CreateUsersTable extends Migration
             $table->foreign('tema_id')->references('id')->on('temas');
             
             $table->rememberToken();
-
             $table->timestamps();
         });
     }

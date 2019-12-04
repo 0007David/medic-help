@@ -20,7 +20,16 @@ Auth::routes();
 Route::get('/test', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/especialidad','EspecialidadController@index2');
+// BEGIN RUTAS ESPECIALIDAD
+Route::get('/especialidad', 'EspecialidadController@mostrarVista');
+Route::post('submit','EspecialidadController@store');
+
+Route::get('/{id}/editarEspecialidad', 'EspecialidadController@update');
+Route::post('/especialidad/{id}/edit', 'EspecialidadController@modificar');
+Route::get('/{id}/eliminarEspecialidad', 'EspecialidadController@destroy');
+Route::get('/{id}/activarEspecialidad', 'EspecialidadController@activar');
+// END RUTAS ESPECIALIDAD
+
 
 // Route::group(['prefix'=>'services'], function (){
 //   Route::get('/create','ServiceController@create');
@@ -33,6 +42,7 @@ Route::resource('groups','GroupController');
 Route::get('/empleados', 'EmployeeController@mostrarVista');
 Route::get('/empleado','EmployeeController@create'); // formulario save
 Route::post('empleado/store','EmployeeController@almacenarEmpleado');
+
 Route::get('/empleado/{id}/edit', 'EmployeeController@edit'); //formulario edit
 Route::post('empleado/{id}/update','EmployeeController@update');
 
@@ -61,4 +71,16 @@ Route::get('/reportes','TestController@indexReporte');
 
 
 
+
+
+
+// Route::get('/empleado/{id}/edit', 'EmployeeController@edit'); //formulario edit
+
+Route::get('/nuevo','EmployeeController@create');
+
+
+// CRUD PACIENTE
+Route::get('/pacientes', 'PatientController@listarPacientes');
+Route::get('/nuevoPaciente', 'PatientController@create');
+Route::post('paciente/store','PatientController@alamcenarPaciente');
 
