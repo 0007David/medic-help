@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Person;
 use App\Employee;
 use App\User;
+use App\Usuario;
 
 class EmployeeController extends Controller
 {
