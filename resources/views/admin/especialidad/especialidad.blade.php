@@ -48,45 +48,18 @@
       <!-- /.modal -->
 <!-- FIN DE MODAL INSERTAR ESPECIALIDAD  -->
 
-  <!-- INICIO DE MODAL EDITAR ESPECIALIDAD  -->
-  <div class="modal fade" id="modal-edit">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Editar Especialidad</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <form action="EspecialidadController@update" method="POST" role="form">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label class="float-left">Nombre</label>
-                    <input type="text" class="form-control" value="{{ $data[4]->nombre }}" name="nombre" id="nombreEspEdit" placeholder="Esciba el nombre de la especialidad">
-                </div>
-                    <div class="modal-footer justify-content-between form-group">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                    </div>
-                </form>
-              <!-- <p>One fine body&hellip;</p> -->
-              
-            </div>
-
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-<!-- FIN DE MODAL EDITAR ESPECIALIDAD  -->
-
-
     <div class="wrapper m-2">
         <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-default">Agregar especialidad</button>
     </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                      <ul>
+                        @foreach ( $errors->all() as $error)
+                          <p> {{ $error }}</p>
+                        @endforeach
+                      </ul>
+                    </div>
+                  @endif
         <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
@@ -99,18 +72,33 @@
                 </tr>
                 </thead>
                 <tbody>
+                
                 @foreach($data as $value)
-                    <tr>
-                    <td>{{ $value->id }}</td>
-                    <td>{{ $value->nombre }}</td>
-                    <td>
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                      <!-- data-toggle="modal" data-target="#modal-edit" -->
-                        <button type="button" class="btn btn-warning" value="xdxd">Editar</button>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
-                      </div>
-                    </td>
-                    </tr>
+                    @if($value->status == '1')
+                      <!-- echo('true'); -->
+                        <tr>
+                          <td>{{ $value->id }}</td>
+                          <td>{{ $value->nombre }}</td>
+                          <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <a href="{{ url('/'.$value->id.'/editarEspecialidad') }}" class="btn btn-warning">Editar</a>
+                              <a href="{{ url('/'.$value->id.'/eliminarEspecialidad') }}" class="btn btn-danger">Eliminar</a>
+                            </div>
+                          </td>
+                        </tr>
+                    @else
+                    <!-- echo('false'); -->
+                        <tr class="table-danger">
+                          <td>{{ $value->id }}</td>
+                          <td>{{ $value->nombre }}</td>
+                          <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <a href="{{ url('/'.$value->id.'/activarEspecialidad') }}" class="btn btn-success">Activar</a>
+                            </div>
+                          </td>
+                        </tr>
+                    @endif
+
                  @endforeach
                 </tbody>
                 <tfoot>
@@ -125,7 +113,6 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-        
     </section>
 
   </div>
