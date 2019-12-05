@@ -109,6 +109,10 @@ class DocumentController extends Controller
              return view("mensajes.msj_rechazado")->with("msj","hubo un error vuelva a intentarlo");  
         }
     }
-
+    //pruebasss
+    public function alldocuments()
+    {
+        return response()->json(Document::get(), 200);
+    }
  
 }

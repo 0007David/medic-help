@@ -54,5 +54,7 @@ Route::group(['prefix'=>'Especialidad'], function (){
     Route::post('destroy', 'EspecialidadController@destroy');
 });
 
+Route::get('documents','DocumentController@alldocuments');
+
 
 
