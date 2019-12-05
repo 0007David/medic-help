@@ -70,3 +70,5 @@ Route::post('Especialidad/delete/{id}', 'Api\EspecialidadApiController@delete');
 //END RUTAS API ESPECIALIDAD
 
 
+//API GRUPOS
+Route::get('/usuarioGrupos','Api\GrupoController@getGrupoDeUsuario');
