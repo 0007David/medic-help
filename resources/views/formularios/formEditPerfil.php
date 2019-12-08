@@ -138,5 +138,6 @@
         </div>
   </div>    
 </div> 
+</div>
 <!-- fin de la segunda columna-->
 

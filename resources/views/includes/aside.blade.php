@@ -52,8 +52,17 @@
                       <p>Cargar Documentos</p>
                       </a>
                   </li>
+                  <li class="nav-item">
+                    <!--Agregar documentos -->
+                     <!--<a href="{{ url('mostrarFormDocGrupo/'.$usuario->id) }}"  class="nav-link active">-->
+                      <a href="javascript:void(0);" onclick="VistaGrupo(<?=$usuario->id ?>);" class="nav-link active">
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>Agregar Doc a grupo</p>
+                      </a>
+                  </li>
 
                 </ul>
+
             </li>
 
           <li class="nav-item has-treeview">

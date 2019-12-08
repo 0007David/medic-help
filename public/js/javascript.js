@@ -12,6 +12,19 @@ function cargarFormularioPerfil(id_usuario){
 
 }
 
+function VistaGrupo(id_usuario){
+//funcion para mostrar vista de cargar documento
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+    var url = "mostrarFormDocGrupo/"+id_usuario+"";
+    $("#capa_para_edicion").html($("#cargador_empresa").html());
+    $.get(url,function(resul){
+        $("#capa_para_edicion").html(resul);
+    })
+        
+
+}
+
 function mostrarFormularioDoc(id_usuario){
 //funcion para mostrar vista de cargar documento
     $("#capa_modal").show();
@@ -49,6 +62,7 @@ function borrarDocumento1(arg){
 
         if(nombreform=="f_subir_imagen" ){ var miurl="subir_imagen_usuario";  var divresul="notificacion_resul_fci"}
         if(nombreform=="f_agregar_documento"){ var miurl="subir_archivo_usuario"; var divresul="notificacion_resul_fap"}
+        if(nombreform=="f_agregar_documento_grupo"){ var miurl="subir_archivo_grupo"; var divresul="notificacion_resul_fg"}
         //información del formulario
         var formData = new FormData($("#"+nombreform+"")[0]);
         //hacemos la petición ajax   

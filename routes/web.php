@@ -32,6 +32,17 @@ Route::post('subir_archivo_usuario', 'DocumentController@agregarDocumento');
 Route::get('borrar_Documento/{id}','DocumentController@borrar_Documentos');
 Route::get('descargar_Documento/{id}','DocumentController@descargarDocumento');
 
+//gestionar archivos em grupo
+Route::get('mostrarFormDocGrupo/{id}','GroupController@formGrupoDoc');
+Route::post('subir_archivo_grupo', 'GroupController@agregarDocumento_Grupo');
+
+//Dropbox
+//Route::get('/', 'FileController@index')->name('files.index');
+//Route::post('/files', 'FileController@store')->name('files.store');
+Route::post('/files', 'FileController@store')->name('files.store');
+Route::delete('/files/{file}', 'FileController@destroy')->name('files.destroy');
+Route::get('/files/{file}/download', 'FileController@download')->name('files.download');
+
 
 
 

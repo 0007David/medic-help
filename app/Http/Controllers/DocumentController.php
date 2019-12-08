@@ -15,18 +15,21 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
-
+use Spatie\Dropbox\Client;
+use App\Http\Controllers\FileController;
 
 class DocumentController extends Controller
 {
     public function __construct()
     {
-    	$this->middleware('auth');
+        $this->middleware('auth');
+        $this->dropbox = Storage::disk('dropbox')->getDriver()->getAdapter()->getClient();
     }
 
     public function vistaAddDocumento( $id )
     //devolver formulario de agregar documento 
     {
+
     	$usuario=User::find($id);
     	$user_id=$usuario->id;
     	$persona=Person::find($user_id);
@@ -47,12 +50,31 @@ class DocumentController extends Controller
     }
 
 
-    public function agregarDocumento( Request $request)
+    public function agregarDocumentoGrupo($archivo,$id)
+    {       
+        //agregando a local
+
+        $ruta=$id."/".$id."_".$archivo->getClientOriginalName();
+        $r1=Storage::disk('archivos')->put($ruta,  \File::get($archivo) );
+
+        //agregando a dropbox
+        $url_global = (new FileController)->generar_url($archivo);
+
+        $resultado = array('ruta_local' =>$ruta ,'ruta_global'=>$url_global, );
+        return $resultado;
+
+    }
+    public function agregarDocumento( Request $request) 
     {
-    	$archivo = $request->file('file');
+
+        
+        $archivo = $request->file('file');
+        //subiendo el archivo a drobox
+        $url_global = (new FileController)->generar_url($archivo);
       	$input = array('file' => $archivo);
-      	$reglas = array('file' =>'required|mimes:pdf|max:50000');
-      	$validacion = Validator::make($input, $reglas);
+      	$reglas = array('file' =>'required|max:50000');
+        $validacion = Validator::make($input, $reglas);
+
         if ($validacion->fails())
         {
           return view("mensajes.msj_rechazado")->with("msj","El archivo no es un pdf o es demasiado Grande para subirlo por favorcito");
@@ -61,23 +83,26 @@ class DocumentController extends Controller
         {
         	
             $documento = new Document;
-            $documento->descripcion=$request->input("descripcion");
+            $documento->descripcion=$request->input("descripcion");          
             $documento->estado="activado";
             $documento->fecha_creacion="2019-11-05";
             $documento->observaciones=$request->input("observacion");
-            $documento->id_patient=$request->input("id_usuario");
+            $documento->id_patient=$request->input("paciente");
             $documento->id_service=$request->input("servicio");
-            //falta terminar 
-            $documento->id_employee=$request->input("id_usuario");
-            //falta terminar
+        
+            $documento->id_employee=$request->input("empleado");
+        
             $carpeta = $request->input("id_usuario");
             $ruta=$carpeta."/".$request->input("id_usuario")."_".$archivo->getClientOriginalName();
             $r1=Storage::disk('archivos')->put($ruta,  \File::get($archivo) );
+
             $documento->url_archivo=$ruta;
+            $documento->url_archivo_global=$url_global;
             $resul= $documento->save();
 
            if($resul){            
-              return view("mensajes.msj_correcto")->with("msj","Documento Agregada Correctamente");   
+             return view("mensajes.msj_correcto")->with("msj","Documento Agregada Correctamente"); 
+              
             }
             else
             {            
@@ -103,6 +128,7 @@ class DocumentController extends Controller
         $resul=$documento->delete();
         if($resul){            
             return view("mensajes.msj_correcto")->with("msj","Borrado correctamente");   
+
         }
         else
         {            
@@ -113,6 +139,24 @@ class DocumentController extends Controller
     public function alldocuments()
     {
         return response()->json(Document::get(), 200);
+    }
+
+    public function documentById($id)
+    {   
+        $documento=Document::find($id);
+        return response()->json($documento,200);
+    }
+
+    public function documentoSave()
+    {
+        $documento = Document::create($request->all());
+        return response()->json($Document, 201);
+    }
+    public function prueba()
+    {
+        $Test = array("saludo" => "hola");
+        $t = json_encode($Test);
+        return response()->json($Test,200);
     }
  
 }

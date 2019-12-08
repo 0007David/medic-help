@@ -9,6 +9,7 @@
             <!-- token de seguridad--> 
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
               <input type="hidden" name="id_usuario" value="<?= $usuario->id; ?>"> 
+              <input type="hidden" name="empleado" value="<?= $persona->peopleable_id; ?>"> 
 
                   <div>
                       <label>paciente</label>
