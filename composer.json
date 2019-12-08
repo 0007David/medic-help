@@ -9,17 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
-<<<<<<< HEAD
         "barryvdh/laravel-debugbar": "^3.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "spatie/flysystem-dropbox": "^1.2"
-=======
-        "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0"
->>>>>>> 8c3c0c98daefe2d2f28c07713a9a273cbcbad9cf
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
