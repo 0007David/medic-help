@@ -32,6 +32,7 @@ function mostrarFormularioDoc(id_usuario){
     var url = "mostrarFormVista/"+id_usuario+"";
     $("#capa_para_edicion").html($("#cargador_empresa").html());
     $.get(url,function(resul){
+        console.log("resul", resul);
         $("#capa_para_edicion").html(resul);
     })
         

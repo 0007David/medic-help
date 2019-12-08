@@ -3,12 +3,17 @@
 @section('body-class','hold-transition sidebar-mini layout-fixed')
 @section('content')
 <div class="wrapper">
+
+  @section('nav-class', auth()->user()->tema_nav_bar)
   @include('includes.navbar')
   
+  @section('aside-class', auth()->user()->tema_aside)
+  
+  @section('logoA-class', auth()->user()->tema_logo)
   @include('includes.aside')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-     <!-- contenido capas modales para no recargar todo el document-->
+      <!-- contenido capas modales para no recargar todo el document-->
           <section> 
              <div id="capa_modal" class="div_modal" ></div>
              <div id="capa_para_edicion" class="div_contenido" > <div>
@@ -17,14 +22,11 @@
     <!--inicio del contenido principal-->
     <section class="content" id="contenido_principal">
   
-    	<div class="container-fluid" >
-    		<h1>Hola Bienvenido   {{ auth()->user()->name }}</h1>
+      <div class="container-fluid" >
+        <h1>Hola Bienvenido   {{ auth()->user()->name }}</h1>
 
-
-	
-
-    	</div>
-    	
+      </div>
+      
     </section>
     <!--fin del contenido principal-->
 
@@ -33,16 +35,18 @@
             <br>
          
 
-         <label style="color:#FFF; background-color:#ABB6BA; text-align:center">&nbsp;&nbsp;&nbsp;Espere... &nbsp;&nbsp;&nbsp;</label>
+           <label style="color:#FFF; background-color:#ABB6BA; text-align:center">&nbsp;&nbsp;&nbsp;Espere... &nbsp;&nbsp;&nbsp;</label>
 
-         <img src="imagenes/cargando.gif" align="middle" alt="cargador"> &nbsp;<label style="color:#ABB6BA">Procesando...</label>
+           <img src="imagenes/cargando.gif" align="middle" alt="cargador"> &nbsp;<label style="color:#ABB6BA">Procesando...</label>
 
-          <br>
-         <hr style="color:#003" width="50%">
-         <br>
+            <br>
+           <hr style="color:#003" width="50%">
+           <br>
        </div>
      <!--fin del cargador de la empresa-->
-      
+  
+    	
+    </section>      
   </div>
 
   @include('includes.footer')

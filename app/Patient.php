@@ -1,13 +1,13 @@
 <?php
 
 namespace App;
-use App\User;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
+
 	protected $table = 'patients';
+	
     public function person()
     {
         return $this->morphOne('App\Person', 'peopleable');
@@ -16,8 +16,5 @@ class Patient extends Model
     public function documents(){
         return $this->hasMany('App\Document');
     }
-
-
-
 
 }

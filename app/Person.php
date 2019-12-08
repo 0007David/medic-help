@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Person extends Model
 {	
 	protected $table = 'people';
-    protected $fillable = ['ci','nombre','apellido','telefono','fecha_nacimiento','email','sexo','estado'];
+    protected $fillable = ['ci','nombre','apellido','telefono','fecha_nacimiento','email','sexo','estado','user_id'];
 
     public function peopleable()
     {
@@ -15,13 +15,6 @@ class Person extends Model
     }
 
     public function user(){
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
-
-    //relacionando User con persona
-    public function usuario()
-    {
-    	return $this->belongsTo('App\User','user_id','id');
-    }
-
 }

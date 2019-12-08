@@ -40,6 +40,10 @@
                     <label class="form-check-label" for="remember">
                         {{ __('Remember Me') }}
                     </label>
+<<<<<<< HEAD
+=======
+                    <label>dfdjksfksjf</label>
+>>>>>>> 8c3c0c98daefe2d2f28c07713a9a273cbcbad9cf
                 </div>
             </div>
         </div>

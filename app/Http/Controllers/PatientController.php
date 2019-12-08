@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Patient;
-use App\User;
+
 use App\Person;
+use App\User;
 use Carbon;
 
 class PatientController extends Controller
@@ -26,14 +27,24 @@ class PatientController extends Controller
 		echo json_encode($patients);
 	}
 
+
+	public function listarPacientes(){
+		$patients = DB::table('people')
+					  ->join('patients', 'patients.id', '=', 'people.peopleable_id')
+					  ->where('peopleable_type','App\Patient')
+					  ->get();
+
+		return view('admin.pacientes.index')->with(compact('patients')); 
+	}
+
 	/**
 	 * Muestra el formulario donde insertar un datos a un modelo de la BBDD
 	 * @return 
 	 */
 	public function create(){
 
+		return view('admin.pacientes.create');
 	}
-
 
 	/**
 	 * Metodo que inserta los datos de un modelo de la BBDD
@@ -56,16 +67,51 @@ class PatientController extends Controller
 		]);
 
 		echo json_encode($patient);
-
-
 	
+	}
+
+	public function alamcenarPaciente( Request $request){
+		$paciente = new Patient();
+		$paciente->nro_seguro = $request->nro_seguro;
+        $paciente->save();
+
+        $usuario=new User();
+        $usuario->name=$request->nombre;
+        $usuario->email = $request->email;
+        $usuario->estado= 'a';
+        $usuario->password=bcrypt($request->ci);
+		$usuario->save();
+
+		$user_id = User::all()->max('id');
+		// echo '<pre>'; print_r($user_id); echo '</pre>';
+		// echo 'console.log("'; $user_id; echo'");';
+
+		$paciente->person()->create([
+			'ci'=> $request->ci,
+			'nombre'=>$request->nombre,
+			'apellido'=>$request->apellido,
+			'telefono'=>$request->telefono,
+            'fecha_nacimiento'=>$request->fecha_nacimiento,
+            'email'=>$request->email,
+            'sexo'=>$request->sexo,
+            'estado'=> 'a',
+            'user_id' => $user_id,
+        ]);
+        // echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
+	
+        return redirect('/pacientes');
 	}
 
 	/**
 	 * Metodo que devuelve el formulario para editar los datos de un modelo de la BBDD
 	 * @return 
 	 */
-	public function edit(){
+
+	public function edit(Request $request){
+
+		$paciente = $this->getPatient($request->id);
+
+		return view('admin.pacientes.edit')->with(compact('paciente'));
 	
 	}
 
@@ -89,7 +135,7 @@ class PatientController extends Controller
             'estado'=>$request->estado
 		]);
 
-		echo json_encode($patient);
+		return redirect('/pacientes');
 	
 	}
 
@@ -124,4 +170,13 @@ class PatientController extends Controller
 	
 	}
 
+	public function getPatient($id){
+		return DB::table('people')
+		->join('patients', 'patients.id', '=', 'people.peopleable_id')
+		->where([
+			['patients.id','=',$id],
+			['peopleable_type','=','App\Patient']
+		])
+		->get()->first();
+	}
 }

@@ -1,12 +1,15 @@
 <?php
 
 namespace App;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-use Illuminate\Database\Eloquent\Model;
-
-class employee_group extends Model
+class employee_group extends Pivot
 {
-    public function employee_group(){
-        return $this->belongsTo('App\Employee');
-    }
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = true;
+
 }

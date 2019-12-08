@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Document;
-use App\Group;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Employee;
+use App\Group;
 
 class GroupController extends Controller
 {
@@ -17,8 +19,20 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return Group::all();
+
+        return view('groups.index');
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('groups.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -28,14 +42,18 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $group=new Group();
-        $group->descripcion=$request['descripcion'];
-        $group->nombre=$request['nombre'];
+        $group->nombre=$request->input('nombre');
+        $group->descripcion=$request->input('descripcion');
         $group->save();
+
+        //Aqui falta encontrar al employee porque no hay base, por ahora voy a usar el id del user que esta loggeado, mas el grupo se relaciona con el 1ro. 
+        $employee=Employee::find(auth()->user()->id);
+        $group->employees()->attach((auth()->user()->id),['descargar'=>'true','eliminar'=>'true','lectura'=>'true', 'rolGrupo'=>'dueño']);
+        return 'saved';
     }
 
     /**
      * Display the specified resource.
-     *
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
@@ -124,7 +142,5 @@ class GroupController extends Controller
         $id_grupo =$request->input("grupo");
         //falta completar
         //hago una consulta para obtener el ultimo documento creado por empleado y lo guardo en grupo-documento
-
-    
     }
 }

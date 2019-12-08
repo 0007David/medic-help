@@ -63,6 +63,10 @@
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
+<<<<<<< HEAD
+=======
+                                        
+>>>>>>> 8c3c0c98daefe2d2f28c07713a9a273cbcbad9cf
                                     </form>
                                 </div>
                             </li>

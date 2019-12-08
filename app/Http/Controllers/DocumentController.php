@@ -33,7 +33,7 @@ class DocumentController extends Controller
     	$usuario=User::find($id);
     	$user_id=$usuario->id;
     	$persona=Person::find($user_id);
-        $empleado=Employee::find($user_id);
+        $empleado=Employee::find($persona->peopleable_id);
         $documentos = Document::all();
     	$pacientes = Patient::all();
         $servicios = servicio::all();

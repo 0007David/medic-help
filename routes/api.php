@@ -22,8 +22,10 @@ use Illuminate\Http\Request;
 Route::apiResource('patients', 'PatientController');
 Route::apiResource('employees', 'EmployeeController');
 
+Route::post('/login','Api\LoginController@login');
+
 Route::post('registrar','UsuarioController@registrar');
-Route::post('login','UsuarioController@login');
+// Route::post('login','UsuarioController@login');
 
 Route::group(['prefix'=>'security'], function (){
     Route::get('index', 'SecurityController@index');
@@ -54,7 +56,21 @@ Route::group(['prefix'=>'Especialidad'], function (){
     Route::post('destroy', 'EspecialidadController@destroy');
 });
 
+
 //gestionar documento
 Route::apiResource('documento','Documento\Documento');
 
+// API PARA REPORTES
+Route::post('/reporte','Api\ReporteController@storeReporte');
+// Route::post('/login','Api\LoginController@login');
 
+//BEGIN RUTAS API ESPECIALIDAD
+Route::get('Especialidad/list', 'Api\EspecialidadApiController@list');
+Route::get('Especialidad/list/{id}', 'Api\EspecialidadApiController@getEspecialidad');
+Route::post('Especialidad/insert', 'Api\EspecialidadApiController@insert');
+Route::put('Especialidad/update/{id}', 'Api\EspecialidadApiController@update');
+Route::post('Especialidad/delete/{id}', 'Api\EspecialidadApiController@delete');
+//END RUTAS API ESPECIALIDAD
+
+//API GRUPOS
+Route::get('/usuarioGrupos','Api\GrupoController@getGrupoDeUsuario');

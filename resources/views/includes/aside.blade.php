@@ -1,10 +1,10 @@
 <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="@yield('aside-class')">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a id="logo" href="/home" class="@yield('logoA-class')">
+      <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">MedicHelp</span>
     </a>
 
     <!-- Sidebar -->
@@ -28,7 +28,9 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+
+            <a href="/home" class="nav-link active">
+
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -54,7 +56,7 @@
                   </li>
                   <li class="nav-item">
                     <!--Agregar documentos -->
-                     <!--<a href="{{ url('mostrarFormDocGrupo/'.$usuario->id) }}"  class="nav-link active">-->
+                     
                       <a href="javascript:void(0);" onclick="VistaGrupo(<?=$usuario->id ?>);" class="nav-link active">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>Agregar Doc a grupo</p>
@@ -103,14 +105,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/empleados" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Empleados</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
+
+                <a href="/pacientes" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pacientes</p>
                 </a>
@@ -131,8 +134,9 @@
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+
+            <a href="/temas" class="nav-link">
+              <i class="nav-icon fas fa-brush"></i>
               <p>
                 Temas
               </p>
@@ -142,7 +146,7 @@
           <li class="nav-item has-treeview">
                <!-- Usuarios -->
           <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-cogs"></i>
               <p>
                 Configuracion
                 <i class="fas fa-angle-left right"></i>
@@ -150,21 +154,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/roles" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Roles</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="/especialidad" class="nav-link">
+                  <i class="far fa-list-alt nav-icon"></i>
                   <p>Especialidades</p>
                 </a>
               </li>
 
                <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
+                <a href="/services" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Servicios</p>
                 </a>
