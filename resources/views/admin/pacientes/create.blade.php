@@ -35,7 +35,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-id-card"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="ci" name="ci" placeholder="ci" required>
+                      <input type="text" class="form-control" pattern="[0-9]+" id="ci" name="ci" placeholder="ci" required>
                     </div>  
                     
                   </div>
@@ -46,7 +46,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-user"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="name" name="nombre" placeholder="nombre" required>
+                      <input type="text" class="form-control" pattern="[A-Za-z. ]+" id="name" name="nombre" placeholder="nombre" required>
                     </div>
                     
                   </div>
@@ -57,7 +57,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-align-center"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="lastName" name="apellido" placeholder="apellido" required>
+                      <input type="text" class="form-control" pattern="[A-Za-z. ]+" id="lastName" name="apellido" placeholder="apellido" required>
                     </div>
                     
                   </div>
@@ -88,7 +88,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-phone-volume"></i></span>
                       </div>   
-                      <input type="text" class="form-control" id="password" name="telefono" placeholder="telefono"> 
+                      <input type="text" pattern="[0-9]+" class="form-control" id="password" name="telefono" placeholder="telefono"> 
                     </div>
                   </div>
                   <!-- CAMPO Fecha_Nacimiento -->
@@ -134,14 +134,14 @@
                       </div>
                     </div>
                   </div>
-                  <!-- Campo type -->
+                  <!-- Campo NRO de Seguro -->
                   <div class="form-group">
                   <label for="password">Nro de Seguro</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="far fa-list-alt"></i></span>
                       </div>
-                      <input type="text" class="form-control" name="nro_seguro">
+                      <input type="text" pattern="[A-Za-z0-9 ]+" class="form-control" name="nro_seguro">
                     </div>
                   <!-- /.input group -->
                   </div>

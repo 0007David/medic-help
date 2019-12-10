@@ -18,6 +18,11 @@ class RolController extends Controller
     {
         $rols = Rol::all();
 
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'Obtener todos los roles ';
+        LogController::storeLog('GET','Obtener','Rol',$quien,$descripcion);
+
         return view('admin.roles.index')->with(compact('rols'));
 
     }
@@ -53,6 +58,10 @@ class RolController extends Controller
         foreach($request->permisos as $key => $value){
             $rol->permisos()->attach($value);
         }
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'almacenar permisos ';
+        LogController::storeLog('POST','Almacenar','Rol Permiso',$quien,$descripcion);
         return redirect('/roles');
     }
 
@@ -71,9 +80,10 @@ class RolController extends Controller
                 $permisosLeft[] = $value;
             }
         }
-        // if($rol->permisos()->get()->count() > 0){
-            
-        // }
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'Obtener formulario de asignar permisos a Rol ';
+        LogController::storeLog('GET','almacenar','Rol',$quien,$descripcion);
         return view('admin.roles.formRolPermiso')->with(compact('rol','permisosRight','permisosLeft'));
     }
 
@@ -110,6 +120,11 @@ class RolController extends Controller
         $rol->nombre = $request->nombre;
         $rol->estado = "a";
         $rol->save();
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'Editar rol';
+        LogController::storeLog('POST','Actualizar','Rol',$quien,$descripcion);
+        
         return back();
     }
 

@@ -25,7 +25,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="/home" class="nav-link active">
+            <a href="{{url('/home')}}" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -82,14 +82,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/empleados" class="nav-link">
+                <a href="{{url('/empleados')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Empleados</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a href="/pacientes" class="nav-link">
+                <a href="{{url('/pacientes')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pacientes</p>
                 </a>
@@ -110,7 +110,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/temas" class="nav-link">
+            <a href="{{url('/temas')}}" class="nav-link">
               <i class="nav-icon fas fa-brush"></i>
               <p>
                 Temas
@@ -129,21 +129,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/roles" class="nav-link">
+                <a href="{{url('/roles')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Roles</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a href="/especialidad" class="nav-link">
+                <a href="{{url('/especialidad')}}" class="nav-link">
                   <i class="far fa-list-alt nav-icon"></i>
                   <p>Especialidades</p>
                 </a>
               </li>
 
                <li class="nav-item">
-                <a href="/services" class="nav-link">
+                <a href="{{url('/services')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Servicios</p>
                 </a>
@@ -155,7 +155,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="{{url('/reportes')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reportes

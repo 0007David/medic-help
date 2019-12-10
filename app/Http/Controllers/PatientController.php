@@ -31,6 +31,10 @@ class PatientController extends Controller
 					  ->join('patients', 'patients.id', '=', 'people.peopleable_id')
 					  ->where('peopleable_type','App\Patient')
 					  ->get();
+		//LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+		$descripcion = 'listar pacientes: ';
+        LogController::storeLog('GET','obetner','Employee',$quien,$descripcion);
 
 		return view('admin.pacientes.index')->with(compact('patients')); 
 	}
@@ -40,6 +44,10 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function create(){
+		//LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'Obtener formulario para crear paciente ';
+        LogController::storeLog('GET','obtener','Patient',$quien,$descripcion);
 		return view('admin.pacientes.create');
 	}
 
@@ -94,7 +102,11 @@ class PatientController extends Controller
             'estado'=> 'a',
             'user_id' => $user_id,
         ]);
-        // echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
+		// echo '<pre>'; print_r($request->nombre ." " .$request->email. " ".$request->apellido); echo '</pre>';
+		//LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'almaceno al paciente: '. $request->nombre;
+        LogController::storeLog('POST','almacenar','Patient',$quien,$descripcion);
 	
         return redirect('/pacientes');
 	}
@@ -106,6 +118,10 @@ class PatientController extends Controller
 	public function edit(Request $request){
 
 		$paciente = $this->getPatient($request->id);
+		//LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'Obtener formulario para editar paciente ';
+        LogController::storeLog('GET','Obtener','Patient',$quien,$descripcion);
 
 		return view('admin.pacientes.edit')->with(compact('paciente'));
 	
@@ -130,6 +146,10 @@ class PatientController extends Controller
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
 		]);
+		//LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'actualizar paciente: '. $request->nombre;
+        LogController::storeLog('POST','actualizar','Patient',$quien,$descripcion);
 
 		return redirect('/pacientes');
 	

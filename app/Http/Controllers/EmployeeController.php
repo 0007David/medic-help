@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Person;
 use App\Employee;
+use App\Rol;
 use App\User;
 use App\Usuario;
 
@@ -54,6 +55,7 @@ class EmployeeController extends Controller
         $usuario->name=$request->nombre;
         $usuario->email = $request->email;
         $usuario->estado= 'a';
+        $usuario->rol_id = $request->rol_id;
         $usuario->password=bcrypt($request->ci);
         $usuario->save();
 
@@ -87,8 +89,12 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.empleados.create');
+    {   $rols = Rol::all();
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'Formulario para crear un empleado ';
+        LogController::storeLog('GET','Crear','Employee',$quien,$descripcion);
+        return view('admin.empleados.create')->with(compact('rols'));
     }
 
     
@@ -187,7 +193,11 @@ class EmployeeController extends Controller
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
 
-		]);
+        ]);
+        //LOG
+        $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
+        $descripcion = 'se actualizara al empleado: '. $request->nombre;
+        LogController::storeLog('POST','actualizar','Employee',$quien,$descripcion);
 
         // echo json_encode($employee);
         return redirect('/empleados');

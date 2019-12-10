@@ -106,4 +106,15 @@ class User extends Authenticatable
         return $this->temas['DEFAULT']['a'];
     }
 
+    public function existePermiso($string){
+        $permisos = $this->rol->permisos;
+        $sw = false;
+        foreach($permisos as $key => $permiso){
+            if($permiso->nombre == $string){
+                $sw = true; break;
+            }
+        }
+        return $sw;
+    }
+
 }

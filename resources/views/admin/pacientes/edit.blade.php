@@ -47,7 +47,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-user"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="name" name="nombre" value="{{$paciente->nombre}}" required>
+                      <input type="text" pattern="[A-Za-z. ]+" class="form-control" id="name" name="nombre" value="{{$paciente->nombre}}" required>
                     </div>
                     
                   </div>
@@ -58,7 +58,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-align-center"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="lastName" name="apellido" value="{{$paciente->apellido}}" required>
+                      <input type="text" pattern="[A-Za-z. ]+" class="form-control" id="lastName" name="apellido" value="{{$paciente->apellido}}" required>
                     </div>
                     
                   </div>
@@ -80,7 +80,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-phone-volume"></i></span>
                       </div>   
-                      <input type="text" class="form-control" id="password" name="telefono" value="{{$paciente->telefono}}"> 
+                      <input type="text" pattern="[0-9]+" class="form-control" id="password" name="telefono" value="{{$paciente->telefono}}"> 
                     </div>
                   </div>
                   <!-- CAMPO Fecha_Nacimiento -->

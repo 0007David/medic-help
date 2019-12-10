@@ -36,7 +36,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="ci" name="ci" placeholder="ci" required>
+                      <input type="text" pattern="[0-9]+" class="form-control" id="ci" name="ci" placeholder="ci solo numeros" required>
                     </div>  
                     
                   </div>
@@ -47,7 +47,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-user"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="name" name="nombre" placeholder="nombre" required>
+                      <input type="text" class="form-control" pattern="[A-Za-z. ]+" id="name" name="nombre" placeholder="nombre" required>
                     </div>
                     
                   </div>
@@ -58,7 +58,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-align-center"></i></span>
                       </div>
-                      <input type="text" class="form-control" id="lastName" name="apellido" placeholder="apellido" required>
+                      <input type="text" class="form-control" pattern="[A-Za-z. ]+" id="lastName" name="apellido" placeholder="apellido" required>
                     </div>
                     
                   </div>
@@ -80,7 +80,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-phone-volume"></i></span>
                       </div>   
-                      <input type="text" class="form-control" id="password" name="telefono" placeholder="telefono"> 
+                      <input type="text" class="form-control" id="password" pattern="[0-9]+" name="telefono" placeholder="telefono"> 
                     </div>
                   </div>
                   <!-- CAMPO Fecha_Nacimiento -->
@@ -136,10 +136,11 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-list-alt"></i></span>
                           </div>
-                          <select class="form-control" name="rol" required>
-                          <option>ROL 1</option>
-                          <option>ROL 2</option>
-                          <option>ROL 3</option>
+                          <select class="form-control" name="rol_id" required>
+                          <option value="" selected>elija una opcion</option>
+                          @foreach($rols as $key => $value)  
+                          <option value="{{$value->id}}">{{$value->nombre}}</option>
+                          @endforeach
                         </select>
 
                         </div>

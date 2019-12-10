@@ -70,10 +70,6 @@ Route::get('/fetchTema', 'TemaController@show');
 Route::get('/reportes','TestController@indexReporte');
 
 
-
-
-
-
 // Route::get('/empleado/{id}/edit', 'EmployeeController@edit'); //formulario edit
 
 Route::get('/nuevo','EmployeeController@create');
