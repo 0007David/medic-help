@@ -46,7 +46,11 @@ class UsuarioController extends Controller
     public function formEditPerfil($id){
         //funcion para retornar una plantilla con datos del usuario
         $usuario = user::find($id);
-        $persona = Person::find($id);
+        
+        $persona = DB::select('SELECT * FROM `people` WHERE people.user_id = :id',['id' => $usuario->id]);
+        $persona = json_decode(json_encode($persona), True);
+        $persona = (object)$persona[0];
+
         $contador = count($usuario);
         if ($contador>0) {
             return view("formularios.formEditPerfil")
@@ -147,5 +151,6 @@ class UsuarioController extends Controller
             return view("mensajes.msj_rechazado")->with("msj","Error al actualizar el password");
         }
     }
+
 
 }

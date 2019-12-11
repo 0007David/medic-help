@@ -31,9 +31,17 @@ class DocumentController extends Controller
     {
 
     	$usuario=User::find($id);
-    	$user_id=$usuario->id;
-    	$persona=Person::find($user_id);
-        $empleado=Employee::find($persona->peopleable_id);
+        
+        $persona = DB::select('SELECT * FROM `people` WHERE people.user_id = :id',['id' => $usuario->id]);
+        $id_empleado = $persona[0]->peopleable_id;
+        // $persona = get_object_vars($persona);
+        //quitando el stdClass
+        $persona = json_decode(json_encode($persona), True);
+        $persona = (object)$persona[0];
+        // :)
+        $empleado=Employee::find($id_empleado);
+        $a = gettype($empleado);
+        $r = gettype($persona);
         $documentos = Document::all();
     	$pacientes = Patient::all();
         $servicios = servicio::all();
@@ -59,7 +67,7 @@ class DocumentController extends Controller
 
         //agregando a dropbox
         $url_global = (new FileController)->generar_url($archivo);
-
+        //$url_global ="prueba";
         $resultado = array('ruta_local' =>$ruta ,'ruta_global'=>$url_global, );
         return $resultado;
 
@@ -81,17 +89,16 @@ class DocumentController extends Controller
         }
         else
         {
-        	
+        	//creando el documento
             $documento = new Document;
             $documento->descripcion=$request->input("descripcion");          
             $documento->estado="activado";
-            $documento->fecha_creacion="2019-11-05";
+            $documento->fecha_creacion=date("Y-m-d");
             $documento->observaciones=$request->input("observacion");
             $documento->id_patient=$request->input("paciente");
             $documento->id_service=$request->input("servicio");
-        
             $documento->id_employee=$request->input("empleado");
-        
+            //almacenando localmente
             $carpeta = $request->input("id_usuario");
             $ruta=$carpeta."/".$request->input("id_usuario")."_".$archivo->getClientOriginalName();
             $r1=Storage::disk('archivos')->put($ruta,  \File::get($archivo) );
@@ -158,5 +165,7 @@ class DocumentController extends Controller
         $t = json_encode($Test);
         return response()->json($Test,200);
     }
+
+
  
 }

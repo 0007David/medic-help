@@ -12,8 +12,13 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-           <?php if($usuario->imagenurl==""){ $usuario->imagenurl="imagenes/avatar.jpg"; }  ?>
-          <img src="{{ Auth()->user()->imagenurl }}" class="img-circle elevation-2" alt="User Image" style="width: 50px; height: 50px;">
+
+          @if (Auth()->user()->imagenurl=="")
+              <img src="{{ asset('imagenes/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image" style="width: 50px; height: 50px;">
+          @else()
+              <img src="{{ Auth()->user()->imagenurl }}" class="img-circle elevation-2" alt="User Image" style="width: 50px; height: 50px;">
+          @endif()
+
         </div>
         <div class="info">
           
@@ -49,7 +54,7 @@
                 <ul class="nav nav-treeview" style="display: none;">
                   <li class="nav-item">
                     <!--Agregar documentos -->
-                     <a href="javascript:void(0);" onclick="mostrarFormularioDoc(<?=$usuario->id ?>);" class="nav-link active">
+                     <a href="javascript:void(0);" onclick="mostrarFormularioDoc({{Auth()->user()->id }});" class="nav-link active">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>Cargar Documentos</p>
                       </a>
@@ -57,7 +62,7 @@
                   <li class="nav-item">
                     <!--Agregar documentos -->
                      
-                      <a href="javascript:void(0);" onclick="VistaGrupo(<?=$usuario->id ?>);" class="nav-link active">
+                      <a href="javascript:void(0);" onclick="VistaGrupo({{Auth()->user()->id }});" class="nav-link active">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>Agregar Doc a grupo</p>
                       </a>

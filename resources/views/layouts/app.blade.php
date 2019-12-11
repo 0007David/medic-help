@@ -29,11 +29,17 @@
   <!-- Style Reportes -->
   <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <link rel="stylesheet" href="css/sistemalaravel.css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/sistemalaravel.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/waves.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
   <style>
         html,
         body {
@@ -134,6 +140,7 @@
 <!-- <script src="{{asset('js/app.js')}}"></script> -->
 <script src="{{asset('js/javascript.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
+<script src="{{ asset('js/waves.js') }}"></script>
 
 </body>
 </html>

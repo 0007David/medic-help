@@ -61,20 +61,15 @@
                               <label for="fecha_nacimiento">Fecha de nacimiento</label>
                               <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"   value="<?= $persona->fecha_nacimiento; ?>" >
         </div>
-
-
-
         </div>
-
-
-
-        <div class="box-footer">
-             <button type="submit" class="btn btn-primary">Actualizar Datos</button>
-        </div>
+                           <div class="box-footer">
+                        <button type="submit"  class="btn btn-primary">Actualizar</button>
+                    </div>
+                    
         </form>
         </div>
+    </div>
 
-  </div> 
 
 <!--  bloque de la 2da columna-->
     <div class="col-md-6">
@@ -101,16 +96,15 @@
                         <input name="archivo" id="archivo" type="file"   class="archivo form-control"  required/><br /><br />
                     </div>
 
-                    <div class="box-footer">
+                                        <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Actualizar Imagen</button>
                     </div>
+                    
                 </form>
-            </div>
-       </div>
-    <div class="col-md-6">
-        <div class="box box-primary">
+                    </div>
+                        <div class="box box-body">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Cambiar Password</h3>
+                    <h3 class="box-title">Password</h3>
                 </div><!-- /.box-header -->
 
                 <div id="notificacion_resul_fcp"></div>
@@ -132,12 +126,15 @@
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Cambiar Datos</button>
+                        <button type="submit"  class="btn btn-primary">Actualizar Password</button>
                     </div>
-                </form>
-        </div>
-  </div>    
-</div> 
+                    
+                    </form>
+                </div>        
+                
+            </div>
+       </div>
+
 </div>
 <!-- fin de la segunda columna-->
 
