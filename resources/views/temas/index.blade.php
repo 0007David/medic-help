@@ -33,7 +33,7 @@
                   <div class="form-group col-md-8 offset-md-2">
                         <label>Nombre de Tema</label>
                         <select class="form-control" id="nombreTema" name="nombre" required>
-                        <option>elige un tema</option>  
+                        <option value="">elige un tema</option>  
                           <option>DARK DRACULA</option>
                           <option>LIGHT</option>
                           <option>BLUE</option>
@@ -45,8 +45,8 @@
                   <div class="form-group col-md-8 offset-md-2"> 
                     <label>Nombre de Fuente</label>          
                     <select  class="form-control" id="fuente"  name="fuente" required> 
-                        <option selected value="" >elija una fuente</option>
-                        <option selected value="default" >por defecto</option>
+                        <option value="" >elija una fuente</option>
+                        <option value="default" >por defecto</option>
                         <option value="arial">Arial</option>
                         <option value="Source Sans Pro ">Sans Pro </option>
                         <option value="Impact,Charcoal">Impact </option>
@@ -63,8 +63,8 @@
                   <!-- nombre FONT SIZE -->
                   <div class="form-group col-md-8 offset-md-2"> 
                     <label>Font SIZE</label>          
-                    <select  class="form-control" id="fontSize" name="fontSize"> 
-                        <option selected>Elija un nro de fuente</option>
+                    <select  class="form-control" id="fontSize" name="fontSize" required> 
+                        <option >Elija un nro de fuente</option>
                         <option value="8">8</option>
                         <option value="12">12</option>
                         <option value="16">16 </option>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Patient;
+
 use App\Person;
 use App\User;
 use Carbon;
@@ -26,6 +27,7 @@ class PatientController extends Controller
 		echo json_encode($patients);
 	}
 
+
 	public function listarPacientes(){
 		$patients = DB::table('people')
 					  ->join('patients', 'patients.id', '=', 'people.peopleable_id')
@@ -44,6 +46,7 @@ class PatientController extends Controller
 	 * @return 
 	 */
 	public function create(){
+
 		//LOG
         $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
         $descripcion = 'Obtener formulario para crear paciente ';
@@ -115,6 +118,7 @@ class PatientController extends Controller
 	 * Metodo que devuelve el formulario para editar los datos de un modelo de la BBDD
 	 * @return 
 	 */
+
 	public function edit(Request $request){
 
 		$paciente = $this->getPatient($request->id);
@@ -195,5 +199,4 @@ class PatientController extends Controller
 		])
 		->get()->first();
 	}
-
 }

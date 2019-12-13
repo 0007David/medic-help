@@ -7,8 +7,8 @@
   @include('includes.navbar')
   
   @section('aside-class', auth()->user()->tema_aside)
-  
-  @section('logoA-class-class', auth()->user()->tema_logo)
+
+  @section('logoA-class', auth()->user()->tema_logo)
   @include('includes.aside')
 
   <!-- Content Wrapper. Contains page content -->
@@ -20,7 +20,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              <h3 class="card-title">Lista de Empleados del Sistemas</h3>
+              <h3 class="card-title">Lista de Empleados del Sistemas {{auth()->user()->tema_logo}}</h3>
           </div>
           
           <div class="card-body">
@@ -32,7 +32,6 @@
                   <th>#</th>
                   <th>CI</th>
                   <th>Nombre</th>
-                  <th>Correo</th>
                   <th>Telefono</th>
                   <th>Sexo</th>
                   <th>Fecha Nacimiento</th>
@@ -46,7 +45,6 @@
                       <td>{{$key+1}}</td>
                       <td>{{$value->ci}}</td>
                       <td>{{$value->nombre ." ". $value->apellido}}</td>
-                      <td>{{$value->email}}</td>
                       <td>{{$value->telefono}}</td>
                       <td>{{$value->sexo}}</td>
                       <td>{{ \Carbon\Carbon::parse($value->fecha_nacimiento)->format('j F, Y') }}

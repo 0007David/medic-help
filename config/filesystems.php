@@ -47,7 +47,20 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'authorizationToken' => env('DROPBOX_TOKEN')
+        ],
+        'fotografias' => [
+            'driver' => 'local',
+            'root' => storage_path('fotografias'),
+        ],
 
+        'archivos' => [
+            'driver' => 'local',
+            'root'   => storage_path('archivos'),
+
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

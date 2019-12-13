@@ -157,14 +157,14 @@ let ulSalir = document.getElementsByTagName('nav');
 // // let liSalir = document.getElementById('liSalir');
 // // divSalir
 // });
-let cuandoClickBotonSalir = (e)=>{
-console.log(e)
+// let cuandoClickBotonSalir = (e)=>{
+// console.log(e)
 
-}
-if(ulSalir){
+// }
+// if(ulSalir){
 
-	ulSalir[0].addEventListener('click', cuandoClickBotonSalir);
-}
+// 	ulSalir[0].addEventListener('click', cuandoClickBotonSalir);
+// }
 
 window.onload =(()=>{
 	

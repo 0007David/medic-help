@@ -12,10 +12,17 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+           <?php if(auth()->user()->imagenurl=="" || auth()->user()->imagenurl== null){  ?>
+             
+             <img src="{{ asset('/imagenes/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image" style="width: 50px; height: 50px;">
+           <?php }else{?>
+          <img src="{{ Auth()->user()->imagenurl }}" class="img-circle elevation-2" alt="User Image" style="width: 50px; height: 50px;">
+           <?php } ?>
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth()->user()->name }}</a>
+          
+        <li class="nav-item d-none d-sm-inline-block"><a href="javascript:void(0);" class="nav-link" onclick="cargarFormularioPerfil(<?=auth()->user()->id ?>);" >Usuario:{{ Auth()->user()->name }}</a></li>
+
         </div>
       </div>
 
@@ -35,14 +42,32 @@
             
           </li>
 
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Documentos
-              </p>
-            </a>
-          </li>
+            <!--Gestionar documentos-->
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link active">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>Documentos<i class="right fas fa-angle-left"></i></p>
+              </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <!--Agregar documentos -->
+                     <a href="javascript:void(0);" onclick="mostrarFormularioDoc(<?= auth()->user()->id ?>);" class="nav-link active">
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>Cargar Documentos</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                    <!--Agregar documentos -->
+                     
+                      <a href="javascript:void(0);" onclick="VistaGrupo(<?=auth()->user()->id ?>);" class="nav-link active">
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>Agregar Doc a grupo</p>
+                      </a>
+                  </li>
+
+                </ul>
+
+            </li>
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -101,7 +126,7 @@
 
 
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="{{url('/reportes')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reportes
@@ -110,7 +135,9 @@
           </li>
 
           <li class="nav-item">
+
             <a href="{{url('/temas')}}" class="nav-link">
+
               <i class="nav-icon fas fa-brush"></i>
               <p>
                 Temas

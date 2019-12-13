@@ -29,5 +29,5 @@ class CreateServicesTable extends Migration
     {
         Schema::dropIfExists('services');
     }
-    
+
 }

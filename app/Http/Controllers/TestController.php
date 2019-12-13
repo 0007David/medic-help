@@ -11,5 +11,4 @@ class TestController extends Controller
         return view('admin.reportes.index');
     }
 
-    
 }

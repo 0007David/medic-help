@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->char('estado',2)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('imagenurl')->nullable();;
             
             //Foreign Key a Rol
             $table->unsignedBigInteger('rol_id')->nullable();

@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
+
+	protected $table = 'patients';
 	
     public function person()
     {
@@ -15,6 +16,5 @@ class Patient extends Model
     public function documents(){
         return $this->hasMany('App\Document');
     }
-
 
 }

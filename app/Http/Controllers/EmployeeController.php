@@ -67,7 +67,6 @@ class EmployeeController extends Controller
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
             'fecha_nacimiento'=>$request->fecha_nacimiento,
-            'email'=>$request->email,
             'sexo'=>$request->sexo,
             'estado'=>'a',
             'user_id' => $user_id ,
@@ -97,7 +96,6 @@ class EmployeeController extends Controller
         return view('admin.empleados.create')->with(compact('rols'));
     }
 
-    
 
     /**
      * Store a newly created resource in storage.
@@ -120,7 +118,11 @@ class EmployeeController extends Controller
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
 		]);
+
         // echo '<pre>'; print_r($employee->id); echo '</pre>';
+
+        // echo '<pre>'; print_r($employee->id); echo '</pre>';
+
         $usuario=new Usuario();
         $usuario->nombre=$request->email;
         $usuario->contraseña=$request->ci;
@@ -147,6 +149,7 @@ class EmployeeController extends Controller
                       ])
                       ->get()->first();  
 
+
 		echo json_encode($employee);
     }
 
@@ -156,6 +159,7 @@ class EmployeeController extends Controller
      * @param  \App\movie  $movie
      * @return \Illuminate\Http\Response
      */
+
     public function edit(Request $request)
     {
         $employee = $this->getEmployee($request->id);
@@ -166,8 +170,7 @@ class EmployeeController extends Controller
         LogController::storeLog('GET','obtener','Employee',$quien,$descripcion);
 
         // dd($employee);
-        return view('admin.empleados.edit')->with(compact('employee'));
-        
+        return view('admin.empleados.edit')->with(compact('employee'));        
     }
 
     /**
@@ -179,7 +182,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $employee = Employee::find($id);
 		$employee->type = null;
 		$employee->save();
@@ -199,7 +202,6 @@ class EmployeeController extends Controller
         $descripcion = 'se actualizara al empleado: '. $request->nombre;
         LogController::storeLog('POST','actualizar','Employee',$quien,$descripcion);
 
-        // echo json_encode($employee);
         return redirect('/empleados');
     }
 
@@ -229,4 +231,5 @@ class EmployeeController extends Controller
                       ])->get()->first(); 
 
     }
+
 }

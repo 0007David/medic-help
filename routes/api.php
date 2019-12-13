@@ -57,6 +57,9 @@ Route::group(['prefix'=>'Especialidad'], function (){
 });
 
 
+//gestionar documento
+Route::apiResource('documento','Documento\Documento');
+
 // API PARA REPORTES
 Route::post('/reporte','Api\ReporteController@storeReporte');
 // Route::post('/login','Api\LoginController@login');
@@ -68,7 +71,6 @@ Route::post('Especialidad/insert', 'Api\EspecialidadApiController@insert');
 Route::put('Especialidad/update/{id}', 'Api\EspecialidadApiController@update');
 Route::post('Especialidad/delete/{id}', 'Api\EspecialidadApiController@delete');
 //END RUTAS API ESPECIALIDAD
-
 
 //API GRUPOS
 Route::get('/usuarioGrupos','Api\GrupoController@getGrupoDeUsuario');

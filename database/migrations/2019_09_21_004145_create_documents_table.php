@@ -20,7 +20,8 @@ class CreateDocumentsTable extends Migration
             $table->date('fecha_creacion');
             $table->text('observaciones');
             $table->string('url_archivo');
-
+            $table->string('url_archivo_global');
+            
             //Foreign Key Paciente
             $table->unsignedBigInteger('id_patient');
             $table->foreign('id_patient')->references('id')->on('patients');

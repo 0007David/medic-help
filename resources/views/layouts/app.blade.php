@@ -6,6 +6,7 @@
   <title>MEDIC-HELP  | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
@@ -27,10 +28,12 @@
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
   <!-- Style Reportes -->
   <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link rel="stylesheet" href="css/sistemalaravel.css">
   <style>
         html,
         body {
@@ -102,6 +105,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
@@ -128,8 +132,8 @@
 
 <!-- Archivo JS Medic-Help -->
 <!-- <script src="{{asset('js/app.js')}}"></script> -->
+<script src="{{asset('js/javascript.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
-
 
 </body>
 </html>

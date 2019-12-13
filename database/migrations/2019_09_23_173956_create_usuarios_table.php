@@ -18,6 +18,7 @@ class CreateUsuariosTable extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->string('contraseña');
+            $table->string('imagenurl');
             $table->unsignedBigInteger('id_employee');
             $table->foreign('id_employee')->references('id')->on('employees');
         });

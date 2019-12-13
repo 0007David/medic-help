@@ -18,12 +18,12 @@ class EspecialidadController extends Controller
     {
         return Especialidad::all();
     }
+
     public function mostrarVista()
     {
         $data = Especialidad::all();
         return view('admin.especialidad.especialidad')->with(compact('data'));
     }
-
 
     public function index2(){
         $especialidad = Especialidad::all();
@@ -32,13 +32,13 @@ class EspecialidadController extends Controller
        return view('admin.especialidad')->with(compact("especialidad"));
     }
 
-  
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(especialidadRequest $request)
     {
         $especialidad= new Especialidad();
@@ -49,8 +49,6 @@ class EspecialidadController extends Controller
         // return $especialidad;
         // print_r($request->input());
     }
-
-
 
     /**
      * Display the specified resource.
@@ -84,6 +82,7 @@ class EspecialidadController extends Controller
         $especialidad=Especialidad::findOrfail($request['id']);
         $especialidad->nombre=$request['nombre'];
         $especialidad->save();
+
         return redirect("/especialidad");
         // return Response()->json($especialidad);
     }
@@ -104,6 +103,7 @@ class EspecialidadController extends Controller
      * @param  \App\Especialidad  $especialidad
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         $especialidad= Especialidad::findOrfail($id);
@@ -111,6 +111,5 @@ class EspecialidadController extends Controller
         $especialidad->status='0';
         $especialidad->save();
         return redirect("/especialidad");
-        
     }
 }

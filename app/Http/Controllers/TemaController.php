@@ -41,10 +41,11 @@ class TemaController extends Controller
      */
     public function store(Request $request)
     {
+        if(!preg_match("/^[[:digit:]]+$/",$request->fontSize) && $request->nombre!= "" && $request->fuente!="") return back();
+
         $quien = 'id: '. Auth()->user()->id. ' name: '.Auth()->user()->name. ' email: '.Auth()->user()->email;
         $descripcion = 'almacena un tema';
         LogController::storeLog('POST','almacenar','Temas',$quien,$descripcion);
-
         
         $userActual = User::find(Auth()->user()->id);
         if( !isset($userActual->tema) ){

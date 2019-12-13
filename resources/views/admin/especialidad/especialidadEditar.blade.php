@@ -3,7 +3,7 @@
 @section('body-class','hold-transition sidebar-mini layout-fixed')
 @section('content')
 <div class="wrapper">
-@section('nav-class', auth()->user()->tema_nav_bar)
+  @section('nav-class', auth()->user()->tema_nav_bar)
   @include('includes.navbar')
   
   @section('aside-class', auth()->user()->tema_aside)
