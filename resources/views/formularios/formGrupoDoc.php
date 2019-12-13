@@ -1,7 +1,6 @@
 <div class="row"> <!---->
     <div class="col-md-6">
-      <div class="box box-primary">
-          <h1> cargar documentos</h1>
+        <div class="box box-primary">
           <!--Notificacion del resultado-->
           <div id="notificacion_resul_fg"></div>
 
@@ -9,7 +8,7 @@
             <!-- token de seguridad--> 
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
               <input type="hidden" name="id_usuario" value="<?= $usuario->id; ?>"> 
-              <input type="hidden" name="empleado" value="<?= $persona->peopleable_id; ?>"> 
+              <input type="hidden" name="empleado" value="<?= $empleado->id; ?>"> 
                    <div>
                       <label>Agregar al grupo:</label>
                         <select id="grupo" name="grupo" class="form-control"  >
@@ -32,6 +31,18 @@
                                               
                         </select>
                   </div> 
+                  
+                   <div>
+                      <label>Servicio:</label>
+                        <select id="servicio" name="servicio" class="form-control"  >
+                            <?php foreach($servicios as $servicio){  ?>
+
+                               <option value="<?= $servicio->id; ?>" ><?= $servicio->nombre; ?></option>
+                            
+                            <?php } ?>
+                                              
+                        </select>
+                  </div>
 
                   <div>
                       <label>Descripcion</label> <br>
@@ -55,22 +66,55 @@
                       <button type="submit"> Agregar documento</button>
                 </div>
           </form>
+        </div>
       </div>
 
-    </div>
 
      <div   class="col-md-6">
 
         <div id="seccion_recarga" class="box box-primary">
           <h1> Grupos</h1>
             <div id="notificacion_resul_fapu"></div>       
+            <div>
+                  <?php
+                 // var_dump($Doc_grupos);
+                  foreach ($Doc_grupos as $grupo) {
+                    $gruponombre  = true; 
+                    foreach ($grupo as $n) {
+                          if ($gruponombre) {
+                            echo "<h1>Nombre Grupo:'$n->nombre'</h1>";
+                            $gruponombre =false;
+                          }else{
 
+                            if (!empty($n)) {
+                              if (sizeof($n) > 1){
+                                foreach ($n as $doc) {
+                                  ?>
+                                  <h1>Documento :<?=$doc->descripcion?></h1>
+                                  <?php
+
+                                }
+                              }else{
+                              ?>
+                              <h1>Documento :<?=$n[0]->descripcion?></h1>
+                              <?php
+                              }  
+                          }
+                       }  
+                  }
+                  ?>
+
+                    
+
+
+
+
+                 
+                 <?php
+                  }
+                  ?>
+            </div>
         </div>
   </div>
-  <script type="text/javascript">
-        $(document).ready(function(){
-         setInternal(function(){$('#seccion_recarga').load()},2000);
-});
-  </script>
   
 </div>
