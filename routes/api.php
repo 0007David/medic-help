@@ -60,6 +60,7 @@ Route::group(['prefix'=>'Especialidad'], function (){
 //gestionar documento
 Route::apiResource('documento','Documento\Documento');
 
+
 // API PARA REPORTES
 Route::post('/reporte','Api\ReporteController@storeReporte');
 // Route::post('/login','Api\LoginController@login');
@@ -74,3 +75,24 @@ Route::post('Especialidad/delete/{id}', 'Api\EspecialidadApiController@delete');
 
 //API GRUPOS
 Route::get('/usuarioGrupos','Api\GrupoController@getGrupoDeUsuario');
+
+
+
+
+
+
+
+//api que devuelva los documentos de un empleado y grupo
+Route::get('gruposDeEmpleado','EmployeeGroupController@Grupos_de_Empleado');
+//api que devuelve los datos persona de un id_usuario
+Route::get('personaDeUsuario','UsuarioController@Persona_de_Usuario');
+//devuelve los documentos de un grupo
+Route::get('documentosGrupo','DocumentController@Documentos_de_un_Grupo');
+//devuelve todos los documentos de un paciente
+Route::get('documentosDePaciente','DocumentController@Documentos_de_un_Paciente');
+//devuelve si un empleado es usuario es emplado o paciente
+Route::get('isPacienteOrEmpleado','UsuarioController@es_Paciente_o_Empleado');
+//devuelve integrantes de un grupo 
+Route::get('integrantesGrupo','GroupController@integrantes_de_Grupo');
+
+

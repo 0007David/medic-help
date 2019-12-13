@@ -109,7 +109,8 @@ class GroupController extends Controller
         $grups = GroupController::grupos_de_Empleado($id_empleado);
         foreach ($grups as $GR ) {
         // creando un array multiple para añadir nodos(grupo,documentos del grupo)
-        $id_grupo = $GR->id;
+        $id_grupo = $GR->id_group;
+        //esta consulta
         $g = DB::select('SELECT* FROM groups,document_groups, documents WHERE groups.id= document_groups.group_id AND documents.id=document_groups.document_id AND groups.id = :id',['id' => $id_grupo]);   
         $getd= array();
         $getd[] = $GR;
@@ -188,11 +189,24 @@ class GroupController extends Controller
     }
 
     }
-    public function grupos_de_Empleado($id_emplado)
-    {   
-        $grupos = DB::select('SELECT * FROM groups, employees_groups WHERE groups.id=employees_groups.id_group AND employees_groups.id_employee =:id',['id' => $id_emplado]);
 
-        return $grupos;
+    public function grupos_de_Empleado(Request $request)
+    {   $id_empleado = $request->id_empleado;
+        $grupos = DB::select('SELECT * FROM groups, employees_groups WHERE groups.id=employees_groups.id_group AND employees_groups.id_employee =:id',['id' => $id_empleado]);
+
+        return response()->json($grupos);
          
     }
+
+        public function integrantes_de_Grupo(Request $request)
+    {   
+        $id_grupo = $request->id_grupo;
+        $resul = DB::select('SELECT*FROM people,employees_groups,employees WHERE employees.id = employees_groups.id_employee AND employees.id =people.peopleable_id AND employees_groups.id_group = :id_grupo',['id_grupo' => $id_grupo]);
+        return  response()->json($resul);
+         
+    }
+
 }
+
+
+

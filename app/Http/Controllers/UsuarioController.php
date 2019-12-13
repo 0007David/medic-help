@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
+use App\Patient;
 use App\Person;
 use App\User;
 use App\Usuario;
@@ -151,6 +153,32 @@ class UsuarioController extends Controller
             return view("mensajes.msj_rechazado")->with("msj","Error al actualizar el password");
         }
     }
+
+    //APIII
+        public function Persona_de_Usuario(Request $request)
+    {   
+        $id = $request->id_usuario;
+        $result = DB::select('SELECT* FROM people WHERE people.user_id =:id',['id' => $id]);
+        return response()->json($result);
+    }
+
+    public function es_Paciente_o_Empleado(Request $request)
+    {   
+        $persona = DB::select('SELECT* FROM people WHERE people.user_id =:id',['id' => $request->id_usuario]);
+      //  var_dump($persona);
+       $id_mutable = $persona[0]->peopleable_id;
+        $paciente = Patient::find($id_mutable);
+
+        if (is_null($paciente)) {
+            echo "es empleado";
+            $empleado =Employee::find($id_mutable);
+            return response()->json($empleado);
+        }else{
+            echo "es paciente";
+            return response()->json($paciente);
+        }
+    }
+
 
 
 }

@@ -234,11 +234,5 @@
       
 
       </div>
-  </div>
-  <script type="text/javascript">
-        $(document).ready(function(){
-         setInternal(function(){$('#seccion_recarga').load()},2000);
-});
-  </script>
-  
+  </div>  
 </div>
