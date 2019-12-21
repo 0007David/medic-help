@@ -180,6 +180,4 @@ class DocumentController extends Controller
         $result =  DB::select('SELECT documents.id,documents.descripcion,documents.estado,documents.fecha_creacion,documents.observaciones,documents.url_archivo,documents.url_archivo_global FROM people,documents WHERE documents.id_patient = people.peopleable_id AND people.user_id =:id',['id' => $id_paciente]);
         return response()->json($result);
     }
-
- 
 }

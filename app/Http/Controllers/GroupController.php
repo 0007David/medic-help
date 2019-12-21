@@ -114,12 +114,34 @@ class GroupController extends Controller
         
     }
 
+
     public function addMember($id){
         //$person= new Person(); 
         // $person=Person::all()->where('peopleable_type', 'App\Employee'); 
         $person=DB::select(DB::raw("SELECT * FROM people, employees WHERE people.peopleable_id=employees.id and employees.id not in (SELECT id_employee FROM employees_groups WHERE employees_groups.id_group={$id})"));
         return view('groups.addMember',compact('person','id'));
 
+    }
+
+    public function formGrupoDoc( $id )
+    {
+        $usuario = User::find($id);
+        $persona = DB::select('SELECT * FROM `people`WHERE people.user_id = :id',['id' => $usuario->id]);
+        //obteniedo el dato de un stdClass
+        //trunca#1 no podia obtener los datos desde persona ya que es un stdClass intente en la forma de json,array[][] :(
+        $id_empleado = $persona[0]->peopleable_id;
+        //Obteniendo todos los grupos al que peretnece el empelado
+        $grups = GroupController::grupos_de_Empleado($id_empleado);
+        foreach ($grups as $GR ) {
+        // creando un array multiple para añadir nodos(grupo,documentos del grupo)
+        $id_grupo = $GR->id_group;
+        //esta consulta
+        $g = DB::select('SELECT* FROM groups,document_groups, documents WHERE groups.id= document_groups.group_id AND documents.id=document_groups.document_id AND groups.id = :id',['id' => $id_grupo]);   
+        $getd= array();
+        $getd[] = $GR;
+        $getd[] = $g;
+        $Doc_grupos[] = $getd;
+        }
     }
     
     public function addNewMember(Request $request){
@@ -169,6 +191,7 @@ class GroupController extends Controller
         return view('groups.listMembers',compact('employeesGroup','group'));
     }
 
+
     public function editarPermisos(Request $request){
 
         $descargar=$this->Boolean($request->input('descargar'));
@@ -187,4 +210,24 @@ class GroupController extends Controller
             return false;
         }
     }
+    public function grupos_de_Empleado(Request $request)
+    {   $id_empleado = $request->id_empleado;
+        $grupos = DB::select('SELECT * FROM groups, employees_groups WHERE groups.id=employees_groups.id_group AND employees_groups.id_employee =:id',['id' => $id_empleado]);
+
+        return response()->json($grupos);
+         
+    }
+
+        public function integrantes_de_Grupo(Request $request)
+    {   
+        $id_grupo = $request->id_grupo;
+        $resul = DB::select('SELECT*FROM people,employees_groups,employees WHERE employees.id = employees_groups.id_employee AND employees.id =people.peopleable_id AND employees_groups.id_group = :id_grupo',['id_grupo' => $id_grupo]);
+        return  response()->json($resul);
+         
+
+    }
+
 }
+
+
+

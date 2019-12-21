@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\employee_group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeGroupController extends Controller
 {
@@ -65,4 +66,20 @@ class EmployeeGroupController extends Controller
     {
         //
     }
+
+    public function Grupos_de_Empleado(Request $request)
+    {
+        $id_empleado = $request->id_empleado;
+
+        $result =  DB::select('SELECT groups.id,groups.nombre, groups.descripcion FROM groups,employees_groups WHERE groups.id = employees_groups.id_group AND employees_groups.id_employee = :id',['id' => $id_empleado]);
+
+       
+     return response()->json($result);
+    
+    }
+
+
+
+
+
 }

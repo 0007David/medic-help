@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Documento;
 use App\Document;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class Documento extends Controller
 {
