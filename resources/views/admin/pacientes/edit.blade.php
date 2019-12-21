@@ -63,15 +63,15 @@
                     
                   </div>
                   <!-- CAMPO Correo  -->
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="email">Email address</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-envelope"></i></span>
                       </div>
-                      <input type="email" class="form-control" id="email" name="email" value="{{$paciente->email}}" required>
+                      <input type="email" class="form-control" id="email" name="email" value="" required>
                     </div>
-                  </div>
+                  </div> -->
                   
                   <!-- CAMPO Telefono -->
                   <div class="form-group">

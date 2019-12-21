@@ -17,7 +17,7 @@
 
       @include('common.errors')
 
-      <form class="form-group" method="POST" action="/services">
+      <form class="form-group" method="POST" action="{{url('/services')}}">
         @csrf 
        <div class="form-group row">
           <label for="serviceName" class="col-sm-2 col-form-label">Nombre de servicio: </label>
@@ -25,6 +25,7 @@
             <input type="text" class="form-control" id="serviceName"  name="nombre" placeholder="Ingrese el servicio">
           </div>
         </div>
+        <a href="{{url('/services')}}" class="btn btn-dark" style="margin:20px"><-ATRAS</a>
         <button type="submit" class="btn btn-primary">Guardar</button> 
       </form>
     </section>

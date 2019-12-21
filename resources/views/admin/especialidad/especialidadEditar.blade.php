@@ -10,7 +10,6 @@
   
   @section('logoA-class', auth()->user()->tema_logo)
   @include('includes.aside')
-
   <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 

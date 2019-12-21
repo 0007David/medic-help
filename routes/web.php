@@ -21,7 +21,7 @@ Route::get('/test', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //gestionar perfil
-Route::get('/formEditPerfil','UsuarioController@formEditPerfil');
+Route::get('formEditPerfil/{id}','UsuarioController@formEditPerfil');
 
 Route::post('subir_imagen_usuario', 'UsuarioController@subir_imagen_usuario');
 Route::post('editar_usuario', 'UsuarioController@editar_usuario');
@@ -44,7 +44,6 @@ Route::post('/files', 'FileController@store')->name('files.store');
 Route::delete('/files/{file}', 'FileController@destroy')->name('files.destroy');
 Route::get('/files/{file}/download', 'FileController@download')->name('files.download');
 
-
 // BEGIN RUTAS ESPECIALIDAD
 Route::get('/especialidad', 'EspecialidadController@mostrarVista');
 Route::post('submit','EspecialidadController@store');
@@ -59,9 +58,6 @@ Route::get('/{id}/activarEspecialidad', 'EspecialidadController@activar');
 // Route::group(['prefix'=>'services'], function (){
 //   Route::get('/create','ServiceController@create');
 // });
-
-Route::resource('services','ServiceController');
-Route::resource('groups','GroupController');
 
 //CRUD EMPLEADO
 Route::get('/empleados', 'EmployeeController@mostrarVista');
@@ -94,15 +90,32 @@ Route::get('/fetchTema', 'TemaController@show');
 // REPORTES
 Route::get('/reportes','TestController@indexReporte');
 
+//PARTE DE DANIEL
+Route::resource('services','ServiceController');
+// Route::resource('groups','GroupController');
+Route::get('/groups', 'GroupController@index'); //listar grupos 
+Route::get('/groups/create', 'GroupController@create');
+Route::post('/groups/store', 'GroupController@store');
+Route::get('/groups/{id}','GroupController@show');
+Route::get('/groups/{id}/edit','GroupController@edit');
+Route::put('/groups/{id}/update','GroupController@update');
 
-// Route::get('/empleado/{id}/edit', 'EmployeeController@edit'); //formulario edit
+Route::get('groups/{id}/listMember','GroupController@addMember');
+Route::post('/addMember','GroupController@addNewMember');
+Route::get('/listaPermisosGrupo/{id}','GroupController@showListaPermisos');
+Route::post('/editarPermisos','GroupController@editarPermisos');
+Route::post('/groups/{id}/','GroupController@prueba');
 
-Route::get('/nuevo','EmployeeController@create');
+//Comentarios
+Route::get('/comentarios','ComentarioController@index');
+Route::get('/comentarios/{idDocument}/{idGrupo}','ComentarioController@getCommentsByDocument');
+Route::post('/comentarios/group/{id_group}/document/{id_documento}','ComentarioController@store');
+
+// Route::get('/backup',['as'=> 'backup','uses'=>'BackupController@index']);
+// Route::get('backup/create', ['as' => 'createBackup','uses'=>'BackupController@create']);
+// Route::get('backup/download/{file_name}',['as'=> 'backupDownload','uses'=>'BackupController@download']);
+// Route::get('backup/delete/{file_name}',['as'=>'backupDelete','uses'=>'BackupController@delete']);
 
 
-// CRUD PACIENTE
-Route::get('/pacientes', 'PatientController@listarPacientes');
-Route::get('/nuevoPaciente', 'PatientController@create');
-Route::post('paciente/store','PatientController@alamcenarPaciente');
 
 

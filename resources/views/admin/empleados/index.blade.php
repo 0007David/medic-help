@@ -20,13 +20,13 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              <h3 class="card-title">Lista de Empleados del Sistemas {{auth()->user()->tema_logo}}</h3>
+              <h3 class="card-title">Lista de Empleados del Sistemas</h3>
           </div>
           
           <div class="card-body">
           
-            <a href="/empleado" class="btn btn-primary">Nuevo Empleado</a>
-            <table id="example2" class="table table-bordered table-hover">
+            <a href="/empleado" class="btn btn-primary mb-2">Nuevo Empleado</a>
+            <table id="empleado" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>#</th>

@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-
+    protected $fillable = ['nombre','descripcion','descargar','ocultar','lectura'];
+    
     public function Group(){
         return $this->hasMany('App\Employee_Person');
     }

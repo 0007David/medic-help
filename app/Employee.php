@@ -9,6 +9,7 @@ class Employee extends Model
 
 	protected $table = 'employees';
 
+    protected $fillable = ['type'];
 
     public function person()
     {
@@ -36,5 +37,12 @@ class Employee extends Model
     public function getFechaNacAttribute(){
         
         return Carbon\Carbon::parse($this->fecha_nacimiento)->format('d/m/Y');
+    }
+
+    static public function getEmployeeByUser(){
+        $person=new Person();
+        $person=Person::where('user_id', Auth()->user()->id)->first();
+        $idEmployee=$person['peopleable_id'];
+        return $idEmployee;
     }
 }

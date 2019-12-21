@@ -15,7 +15,7 @@
 
     <section class="content">
     @include('common.errors')
-      <form class="form-group" method="POST" action="/services/{{$service->id}}">
+      <form class="form-group" method="POST" action="{{url('/services/'.$service->id)}}">
         @method('PUT')
         @csrf 
         <div class="form-group row">
@@ -24,7 +24,7 @@
             <input type="text" class="form-control" id="serviceName"  name="nombre" value="{{$service->nombre}}">
           </div>
         </div>
-
+        <a href="{{url('/services')}}" class="btn btn-dark" style="margin:20px"><-ATRAS</a>
         <button type="submit" class="btn btn-primary">Modificar</button> 
       
       </form>

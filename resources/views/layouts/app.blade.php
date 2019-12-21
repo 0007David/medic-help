@@ -142,5 +142,116 @@
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{ asset('js/waves.js') }}"></script>
 
+<!-- DATATABLESCAMBEGIN -->
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js" type="text/javascript"></script>
+<!-- css -->
+
+<!-- DATATABLESCAMEND -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<script src="{{url('plugins/moment/moment.min.js')}}"></script>
+<script src="{{url('plugins/daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{url('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+
+<script type="text/javascript">
+ console.log("ENTRAAA");
+        $(document).ready(function() {
+
+        $('#reportes').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+        $('#especialidad').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+        $('#empleado').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+         $('#paciente').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+        } );
+        $('#servicio').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+        } );    
+    } );
+  </script>
+  <!-- Daniel js -->
+  <script>
+    $('#exampleModal').on('show.bs.modal',function (event){
+        console.log('Modal Opened');
+        var button = $(event.relatedTarget)
+        var id = button.data('myid')
+        var modal = $(this);
+        modal.find('.modal-body #id').val(id)
+    })
+</script>
+
+<script>
+    $('#editModal').on('show.bs.modal',function (event){
+        console.log('Modal ');
+        var button = $(event.relatedTarget)
+        var id = button.data('myid')
+        var de = button.data('descargar')
+        var oc = button.data('ocultar')
+        var le = button.data('lectura')
+
+
+        if (de==1) {
+            var descargar=true 
+        }else{
+            var descargar=false 
+        }
+
+        if (oc==1) {
+            var ocultar=true 
+        }else{
+            var ocultar=false 
+        }
+        
+
+        if (le==1) {
+            var lectura=true 
+        }else{
+            var lectura=false 
+        }
+
+        var modal = $(this);
+        modal.find('.modal-body #id').val(id)
+        modal.find('.modal-body #descargar3').val(descargar)
+        modal.find('.modal-body #ocultar3').val(ocultar)
+        modal.find('.modal-body #lectura3').val(lectura)
+
+
+        modal.find('.modal-body #descargarInput').val(descargar)
+        modal.find('.modal-body #ocultarInput').val(ocultar)
+        modal.find('.modal-body #lecturaInput').val(lectura)
+
+    })
+</script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();   
+});
+</script>
+
 </body>
 </html>

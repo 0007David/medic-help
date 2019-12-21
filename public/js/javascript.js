@@ -1,28 +1,13 @@
 
 function cargarFormularioPerfil(id_usuario){
 //funcion para cargar la vista de editar perfil de usuario
-  // var idUsuario = parseInt(id_usuario);
-  console.log('exito');
 	$("#capa_modal").show();
 	$("#capa_para_edicion").show();
-	var url = "/formEditPerfil";
+	var url = "formEditPerfil/"+id_usuario+"";
 	$("#capa_para_edicion").html($("#cargador_empresa").html());
-	// $.get(url,function(resul){
-  //   console.log(resul)
-	// 	$("#capa_para_edicion").html(resul);
-  // })
-  var misCabeceras = new Headers({'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 'Content-Type': 'application/json'});
-  fetch('/formEditPerfil', {
-    method: 'get',
-    mode: 'no-cors',
-    headers: misCabeceras,
-    }).then(res => res.json())
-    .catch(error => console.error(error))
-    .then(response => { 
-      console.log('exito')
-      console.log(response)
-      $("#capa_para_edicion").html(response.html);
-    })
+	$.get(url,function(resul){
+		$("#capa_para_edicion").html(resul);
+	})
         
 
 }
@@ -31,7 +16,7 @@ function VistaGrupo(id_usuario){
 //funcion para mostrar vista de cargar documento
     $("#capa_modal").show();
     $("#capa_para_edicion").show();
-    var url = "mostrarFormDocGrupo/"+parseInt(id_usuario)+"";
+    var url = "mostrarFormDocGrupo/"+id_usuario+"";
     $("#capa_para_edicion").html($("#cargador_empresa").html());
     $.get(url,function(resul){
         $("#capa_para_edicion").html(resul);
@@ -43,12 +28,9 @@ function VistaGrupo(id_usuario){
 function mostrarFormularioDoc(id_usuario){
 //funcion para mostrar vista de cargar documento
     $("#capa_modal").show();
-    console.log(typeof(parseInt(id_usuario)))
-    var idUsuario = parseInt(id_usuario);
     $("#capa_para_edicion").show();
-    var url = "mostrarFormVista/"+idUsuario+"";
+    var url = "mostrarFormVista/"+id_usuario+"";
     $("#capa_para_edicion").html($("#cargador_empresa").html());
-    console.log(url);
     $.get(url,function(resul){
         console.log("resul", resul);
         $("#capa_para_edicion").html(resul);

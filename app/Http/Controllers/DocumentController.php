@@ -22,14 +22,15 @@ class DocumentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->dropbox = Storage::disk('dropbox')->getDriver()->getAdapter()->getClient();
     }
 
     public function vistaAddDocumento( $id )
     //devolver formulario de agregar documento 
     {
-        $usuario=User::find($id);
+
+    	$usuario=User::find($id);
         
         $persona = DB::select('SELECT * FROM `people` WHERE people.user_id = :id',['id' => $usuario->id]);
         $id_empleado = $persona[0]->peopleable_id;
@@ -66,7 +67,7 @@ class DocumentController extends Controller
 
         //agregando a dropbox
         $url_global = (new FileController)->generar_url($archivo);
-        //$url_global ="prueba";
+       // $url_global ="prueba";
         $resultado = array('ruta_local' =>$ruta ,'ruta_global'=>$url_global, );
         return $resultado;
 
@@ -165,6 +166,20 @@ class DocumentController extends Controller
         return response()->json($Test,200);
     }
 
+
+    public function Documentos_de_un_Grupo(Request $request)
+    {
+        $id = $request->id_grupo;
+        $result =  DB::select('SELECT* FROM documents, document_groups WHERE document_groups.document_id = documents.id AND document_groups.group_id =:id',['id' => $id]);
+        return response()->json($result);
+    }
+
+    public function Documentos_de_un_Paciente(Request $request)
+    {
+        $id_paciente = $request->id_paciente;
+        $result =  DB::select('SELECT documents.id,documents.descripcion,documents.estado,documents.fecha_creacion,documents.observaciones,documents.url_archivo,documents.url_archivo_global FROM people,documents WHERE documents.id_patient = people.peopleable_id AND people.user_id =:id',['id' => $id_paciente]);
+        return response()->json($result);
+    }
 
  
 }

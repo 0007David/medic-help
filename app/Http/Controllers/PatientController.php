@@ -69,7 +69,6 @@ class PatientController extends Controller
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
 			'fecha_nacimiento'=>$request->fecha_nacimiento,
-			'email'=>$request->email,
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
 		]);
@@ -100,7 +99,6 @@ class PatientController extends Controller
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
             'fecha_nacimiento'=>$request->fecha_nacimiento,
-            'email'=>$request->email,
             'sexo'=>$request->sexo,
             'estado'=> 'a',
             'user_id' => $user_id,
@@ -146,7 +144,6 @@ class PatientController extends Controller
 			'apellido'=>$request->apellido,
 			'telefono'=>$request->telefono,
 			'fecha_nacimiento'=>$request->fecha_nacimiento,
-			'email'=>$request->email,
             'sexo'=>$request->sexo,
             'estado'=>$request->estado
 		]);

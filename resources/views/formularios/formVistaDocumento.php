@@ -9,7 +9,6 @@
           <form id="f_agregar_documento" method="post" action="agregar_documento" class="formarchivo"> 
             <!-- token de seguridad--> 
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
-              
               <input type="hidden" name="id_usuario" value="<?= $usuario->id; ?>"> 
               <input type="hidden" name="empleado" value="<?= $persona->peopleable_id; ?>"> 
               <style type="text/css">
@@ -235,11 +234,5 @@
       
 
       </div>
-  </div>
-  <script type="text/javascript">
-        $(document).ready(function(){
-         setInternal(function(){$('#seccion_recarga').load()},2000);
-});
-  </script>
-  
+  </div>  
 </div>

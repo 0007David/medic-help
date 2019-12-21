@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\user;
 use Illuminate\Http\Request;
 
@@ -24,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$usuarioactual=\Auth::user();
-        return view('home');
+        $employee=Employee::getEmployeeByUser();
+        $groupsEmployee=Employee::find($employee)->groups()->get();
+        return view('home',compact('groupsEmployee'));
         //->with("usuario",$usuarioactual);
     }
 }

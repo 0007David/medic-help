@@ -66,10 +66,11 @@ Route::post('/reporte','Api\ReporteController@storeReporte');
 
 //BEGIN RUTAS API ESPECIALIDAD
 Route::get('Especialidad/list', 'Api\EspecialidadApiController@list');
-Route::get('Especialidad/list/{id}', 'Api\EspecialidadApiController@getEspecialidad');
+Route::get('Especialidad/getEspecialidad', 'Api\EspecialidadApiController@getEspecialidad');
 Route::post('Especialidad/insert', 'Api\EspecialidadApiController@insert');
-Route::put('Especialidad/update/{id}', 'Api\EspecialidadApiController@update');
-Route::post('Especialidad/delete/{id}', 'Api\EspecialidadApiController@delete');
+Route::put('Especialidad/update', 'Api\EspecialidadApiController@update');
+Route::put('Especialidad/delete', 'Api\EspecialidadApiController@delete');
+Route::put('Especialidad/activar', 'Api\EspecialidadApiController@activar');
 //END RUTAS API ESPECIALIDAD
 
 //API GRUPOS

@@ -12,8 +12,76 @@
   @include('includes.aside')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-      <h1>Hola {{ auth()->user()->id }}</h1>
+  @include('common.success')
+        <h2 style="margin-bottom:50px;text-align:center">Lista de Grupos:</h2>
+        <a href="/groups/create" class="btn btn-success " style="text_align:right">Agregar Grupo+</a>
+        <button type="button" class="btn btn-primary user_dialog"  data-toggle="modal" data-target="#exampleModal" >Ayuda+</button>
+            
+            <table class="table table-striped">
+                <thead class="bg-primary">
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                    @foreach($employee2 as $groupEmployee)
+
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>{{$groupEmployee->nombre}}</td>
+                    <td>{{$groupEmployee->descripcion}}</td>
+                    <td>
+                        <a href="/groups/{{$groupEmployee->id}}" class="btn btn-info">Ver</a>
+                        <a href="/groups/{{$groupEmployee->id}}/edit" class="btn btn-info">Editar</a>
+                        <a href="#" class="btn btn-danger">Eliminar</a>
+                    
+                    </td>
+                    </tr>
+
+                    @endforeach
+
+                </tbody>
+            </table> 
+   
+  </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ayuda grupos: </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+                    <div class="container" style="margin-top:30px">
+                      <h4 >Ayuda+</h4>
+                      <small>¿Cúal es la función de cada uno de los botones de la gestion de grupos?</small>
+                      <div style="margin-bottom:20px">
+                      <a href="#" class="btn btn-success" data-toggle="popover" title="AGREGAR" data-content="Permite ir hacia el formulario para añadir un nuevo grupo">Agregar?</a>
+                      </div>
+                      <div style="margin-bottom:20px">
+                      <a href="#" class="btn btn-info" data-toggle="popover" title="VER" data-content="Permite ver a detalle el grupo seleccionado">Ver?</a>
+                      </div>
+                      <div style="margin-bottom:20px">
+                      <a href="#" class="btn btn-info" data-toggle="popover" title="EDITAR" data-content="Permite editar la informacion del grupo, formulario para editar">Editar?</a>
+                      </div>
+                      <div style="margin-bottom:20px">
+                        <a href="#" class="btn btn-danger" data-toggle="popover" title="ELIMINAR" data-content="Permite ocultar o eliminar de forma logica un grupo">Eliminar?</a>
+                      </div>
+                    </div>
+                 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>             
+      </div>
+    </div>
   </div>
 
   @include('includes.footer')

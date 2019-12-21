@@ -10,7 +10,6 @@
   
   @section('logoA-class', auth()->user()->tema_logo)
   @include('includes.aside')
-
   <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -68,7 +67,7 @@
         <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="especialidad" class="table table-bordered table-striped display nowrap">
                 <thead>
                 <tr class="bg-primary">
                   <th>#</th>

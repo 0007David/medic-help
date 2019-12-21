@@ -22,14 +22,13 @@
               <h3 class="card-title">Lista de Pacientes</h3>
           </div>
           <div class="card-body">
-            <a href="/paciente" class="btn btn-primary">Nuevo Paciente</a>
-            <table id="example2" class="table table-bordered table-hover">
+            <a href="/paciente" class="btn btn-primary mb-2">Nuevo Paciente</a>
+            <table id="paciente" class="table table-bordered table-hover table-striped display nowrap">
                 <thead>
                 <tr>
                 <th>#</th>
                   <th>CI</th>
                   <th>Nombre</th>
-                  <th>Correo</th>
                   <th>Telefono</th>
                   <th>Sexo</th>
                   <th>Fecha Nacimiento</th>
@@ -44,7 +43,6 @@
                       <td>{{$key+1}}</td>
                       <td>{{$value->ci}}</td>
                       <td>{{$value->nombre ." ". $value->apellido}}</td>
-                      <td>{{$value->email}}</td>
                       <td>{{$value->telefono}}</td>
                       <td>{{$value->sexo}}</td>
                       <td>{{ \Carbon\Carbon::parse($value->fecha_nacimiento)->format('j F, Y') }} </td>
